@@ -1,26 +1,19 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { useProfile } from '@/hooks/use-query/use-profile'
 import { cpfRegex } from '@/utils/regex'
 import { validateCPF } from '@/utils/validate-cpf'
 
-import { ResultAlert } from './components/alert'
-import { BasicInfo } from './components/basic-info'
-import { Header } from './components/header'
-import { TabsCard } from './components/tabs'
+import { ResultAlert } from './alert'
+import { BasicInfo } from './basic-info'
+import { Header } from './header'
+import { TabsCard } from './tabs'
 
-export default function PersonDetails() {
-  const pathName = usePathname()
+export function Content({ cpf }: { cpf: string }) {
   const router = useRouter()
-  console.log(pathName)
-  const cpf = pathName.split('/').pop()
-  if (!cpf) {
-    router.back()
-    return null
-  }
   const { data: profile } = useProfile()
 
   if (!cpfRegex.test(cpf) || !validateCPF(cpf)) {

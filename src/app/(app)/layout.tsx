@@ -22,7 +22,7 @@ export default async function AppLayout({
       <SidebarProvider>
         <AppSidebar />
         <LogoutTimeOut />
-        <div className="page">{children}</div>
+        {children}
       </SidebarProvider>
     </CustomQueryClientProvider>
   )

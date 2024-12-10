@@ -116,6 +116,6 @@ body {
 
 @layer components {
   .page {
-    @apply w-full;
+    @apply w-full p-2 h-dvh;
   }
 }
