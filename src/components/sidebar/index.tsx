@@ -4,8 +4,8 @@ import {
   AudioWaveform,
   Building2,
   Command,
+  Database,
   Frame,
-  GalleryVerticalEnd,
   Map,
   PieChart,
   Users2,
@@ -34,9 +34,9 @@ const data = {
   },
   teams: [
     {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      name: 'Escritório de Dados',
+      logo: Database,
+      plan: 'Prefeitura do Rio',
     },
     {
       name: 'Acme Corp.',
