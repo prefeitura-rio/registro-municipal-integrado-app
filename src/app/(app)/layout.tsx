@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation'
 
+import { AppSidebar } from '@/components/sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import { CustomQueryClientProvider } from '@/hooks/query-client-provider'
 import { isAuthenticated } from '@/utils/auth'
 
@@ -16,9 +18,12 @@ export default async function AppLayout({
   }
 
   return (
-    <div>
+    <SidebarProvider>
+      <AppSidebar />
       <LogoutTimeOut />
-      <CustomQueryClientProvider>{children}</CustomQueryClientProvider>
-    </div>
+      <CustomQueryClientProvider>
+        <div className="page">{children}</div>
+      </CustomQueryClientProvider>
+    </SidebarProvider>
   )
 }
