@@ -5,6 +5,6 @@ import { getPeople } from '@/http/person/get-people'
 export function usePeople() {
   return useQuery({
     queryKey: ['people'],
-    queryFn: getPeople,
+    queryFn: () => getPeople(),
   })
 }

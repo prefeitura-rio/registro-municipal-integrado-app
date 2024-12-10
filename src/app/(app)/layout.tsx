@@ -18,12 +18,12 @@ export default async function AppLayout({
   }
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <LogoutTimeOut />
-      <CustomQueryClientProvider>
+    <CustomQueryClientProvider>
+      <SidebarProvider>
+        <AppSidebar />
+        <LogoutTimeOut />
         <div className="page">{children}</div>
-      </CustomQueryClientProvider>
-    </SidebarProvider>
+      </SidebarProvider>
+    </CustomQueryClientProvider>
   )
 }

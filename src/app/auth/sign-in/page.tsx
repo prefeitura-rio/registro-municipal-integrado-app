@@ -6,7 +6,7 @@ import SignInForm from './sign-in-form'
 
 export default function SignInPage() {
   return (
-    <div className="grid h-screen w-full grid-cols-2">
+    <div className="grid h-dvh w-full grid-cols-2">
       <div className="flex flex-col items-center justify-center bg-primary p-16">
         <Image
           src={logo}

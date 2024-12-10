@@ -10,8 +10,9 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 
 export function Header() {
   return (
-    <div className="mb-3 flex items-center gap-3">
+    <header className="mb-3 flex items-center gap-3">
       <SidebarTrigger />
+      <div className="h-6 w-[1px] bg-border" />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -23,6 +24,6 @@ export function Header() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-    </div>
+    </header>
   )
 }
