@@ -1,14 +1,32 @@
 export type Person = {
-  name: string
-  email: string
+  deceased: boolean
+  registration_name: string
+  social_name: string | null
   cpf: string
-  neighbourhood: string
-  bithday: string
-  phone: string
-  address: string
-  mostFrequentBus: string
-  mostFrequentBusStop: string
-  referenceHealthUnit: string
+  cns: string | null
+  birth_date: string | null
+  gender: string | null
+  race: string | null
+  phone: string | null
+  family_clinic: {
+    cnes: string | null
+    name: string | null
+    phone: string | null
+  }
+  family_health_team: {
+    ine_code: string | null
+    name: string | null
+    phone: string | null
+  }
+  medical_responsible: {
+    name: string
+    registry: string
+  }[]
+  nursing_responsible: {
+    name: string
+    registry: string
+  }[]
+  validated: boolean
 }
 
 export type Profile = {
