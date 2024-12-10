@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { Toaster } from 'sonner'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { ErrorToast } from '@/utils/error-toast'
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="pt" suppressHydrationWarning>
       <body className={`${poppins.variable} antialiased`}>
+        <Toaster closeButton duration={15000} />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

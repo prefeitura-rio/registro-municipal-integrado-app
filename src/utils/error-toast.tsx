@@ -1,22 +1,27 @@
 'use client'
 
-import { useEffect } from 'react'
+import { deleteCookie, getCookie } from 'cookies-next'
 import { toast } from 'sonner'
 
-import { TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY } from '@/lib/api'
+import {
+  GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY,
+  TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY,
+} from '@/lib/api'
 
 export function ErrorToast() {
-  useEffect(() => {
-    const showToast = localStorage.getItem(
-      TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY,
-    )
-    if (showToast) {
-      localStorage.removeItem(TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY)
-      toast.error(
-        'Você atingiu o limite de consultas de CPF por minuto. Aguarde alguns segundos e tente novamente.',
-      )
-    }
-  }, [])
+  const tooManyRequestsToast = getCookie(
+    TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY,
+  )
+  if (tooManyRequestsToast) {
+    deleteCookie(TOO_MANY_REQUESTS_ERROR_TOAST_LOCAL_STORAGE_KEY)
+    toast.error(tooManyRequestsToast)
+  }
+
+  const grantErrorToast = getCookie(GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY)
+  if (grantErrorToast) {
+    deleteCookie(GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY)
+    toast.error(grantErrorToast)
+  }
 
   return null
 }

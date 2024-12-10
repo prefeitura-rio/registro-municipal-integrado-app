@@ -1,12 +1,13 @@
 'use client'
 
-import { getCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 import {
   ACCESS_TOKEN_COOKIE,
   ACCESS_TOKEN_EXPIRATION_DATE_COOKIE,
+  GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY,
 } from '@/lib/api'
 import { queryClient } from '@/lib/react-query'
 import { logout } from '@/utils/logout'
@@ -23,6 +24,10 @@ export default function LogoutTimeOut() {
         const timeRemaining = Date.parse(tokenExpiry) - Date.now()
         if (timeRemaining > 0) {
           const timeout = setTimeout(() => {
+            setCookie(
+              GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY,
+              'Sua sessão expirou. Por favor, faça login novamente.',
+            )
             queryClient.clear()
             logout()
             clearTimeout(timeout)
@@ -30,6 +35,10 @@ export default function LogoutTimeOut() {
 
           return () => clearTimeout(timeout)
         } else {
+          setCookie(
+            GRANT_ERROR_TOAST_LOCAL_STORAGE_KEY,
+            'Sua sessão expirou. Por favor, faça login novamente.',
+          )
           queryClient.clear()
           logout()
         }
