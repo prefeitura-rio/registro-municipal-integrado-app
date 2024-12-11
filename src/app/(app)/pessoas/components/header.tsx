@@ -8,11 +8,11 @@ import {
 } from '@/components/ui/breadcrumb'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 
-export function Header({ cpf }: { cpf: string }) {
+export function Header() {
   return (
-    <header className="mb-3 flex flex-shrink-0 items-center gap-3">
+    <header className="header">
       <SidebarTrigger />
-      <div className="h-6 w-[1px] bg-border" />
+      <div className="header-separator" />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -20,11 +20,7 @@ export function Header({ cpf }: { cpf: string }) {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/objeto/pessoas">Pessoas</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{cpf}</BreadcrumbPage>
+            <BreadcrumbPage>Pessoas</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

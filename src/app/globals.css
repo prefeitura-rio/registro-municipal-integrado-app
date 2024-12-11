@@ -9,33 +9,33 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 210 8% 5%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
 
-    --card: 240 8% 97%;
-    --card-foreground: 210 8% 5%;
+    --card: 0 0% 99%;
+    --card-foreground: 0 0% 5%;
 
-    --popover: 240 8% 97%;
-    --popover-foreground: 210 8% 5%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 205 100% 20%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 6% 93%;
-    --secondary-foreground: 210 8% 5%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 210 6% 93%;
-    --muted-foreground: 206 6% 45%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 6% 93%;
-    --accent-foreground: 210 8% 5%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 200 6% 90%;
-    --input: 210 7% 82%;
-    --ring: 204 24% 74%;
+    --border: 0 0% 91%;
+    --input: 0 0% 84%;
+    --ring: 0 0% 76%;
 
     --radius: 0.75rem;
     
@@ -116,6 +116,14 @@ body {
 
 @layer components {
   .page {
-    @apply w-full p-2 h-dvh;
+    @apply flex h-dvh flex-col overflow-hidden p-2 w-full;
+  }
+
+  .header {
+    @apply mb-3 flex items-center gap-3;
+  }
+
+  .header-separator {
+    @apply h-6 w-[1px] bg-border;
   }
 }

@@ -46,7 +46,7 @@ export function CPFSearchForm() {
 
   async function onSubmit(props: FormType) {
     const cpf = props.cpf.replaceAll(/[.-]/g, '')
-    router.push(`/objeto/pessoa/${cpf}`)
+    router.push(`/pessoa/${cpf}`)
   }
 
   return (

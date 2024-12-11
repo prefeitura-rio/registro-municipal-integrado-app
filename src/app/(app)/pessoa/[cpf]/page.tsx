@@ -3,13 +3,13 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { BreadcrumbHeader } from '@/components/breadcrumb-header'
 import { useProfile } from '@/hooks/use-query/use-profile'
 import { cpfRegex } from '@/utils/regex'
 import { validateCPF } from '@/utils/validate-cpf'
 
 import { ResultAlert } from './components/alert'
 import { BasicInfo } from './components/basic-info'
-import { Header } from './components/header'
 import { TabsCard } from './components/tabs'
 
 export default function PersonDetails() {
@@ -41,7 +41,13 @@ export default function PersonDetails() {
         <ResultAlert cpf={cpf} open={openAlert} setOpen={setOpenAlert} />
         {!openAlert && (
           <>
-            <Header cpf={cpf} />
+            <BreadcrumbHeader
+              items={[
+                { label: 'Início', href: '/' },
+                { label: 'Pessoas', href: '/pessoas' },
+                { label: cpf },
+              ]}
+            />
             <div className="flex flex-grow flex-col overflow-auto p-4">
               <h1 className="mb-6 flex-shrink-0 text-3xl font-bold">
                 Perfil do Cidadão

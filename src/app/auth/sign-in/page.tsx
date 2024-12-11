@@ -18,7 +18,7 @@ export default function SignInPage() {
         <div className="w-full max-w-[36.4375rem]">
           <div className="flex flex-col items-center gap-3 p-6">
             <h2 className="text-center text-2xl font-semibold leading-6 tracking-tight text-primary">
-              Cadastro Único Municipal
+              Registro Municipal Integrado
             </h2>
             <span className="text-typography-blue-gray-200 text-center">
               Digite seu CPF e senha para entrar na sua conta
