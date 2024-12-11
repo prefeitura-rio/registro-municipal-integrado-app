@@ -14,14 +14,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Education } from './education'
 import { Enterprises } from './enterprises'
 import { Health } from './health'
-import { Revenue } from './revenue'
+import { SocialAssistance } from './social-assistance'
 import { Transportation } from './transport'
 
 export function TabsCard({ cpf }: { cpf: string }) {
   const [activeTab, setActiveTab] = useState('transport')
 
   return (
-    <Card className="flex h-full min-h-[600px] flex-col lg:min-h-0 lg:w-2/3">
+    <Card className="flex h-full min-h-[600px] grow flex-col lg:min-h-0 lg:w-2/3">
       <CardHeader className="flex-shrink-0">
         <CardTitle>Dados do Cidadão</CardTitle>
         <CardDescription>
@@ -53,7 +53,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             className="flex-grow overflow-auto"
             value="social assistence"
           >
-            <Revenue />
+            <SocialAssistance />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="1746">
             <Enterprises />

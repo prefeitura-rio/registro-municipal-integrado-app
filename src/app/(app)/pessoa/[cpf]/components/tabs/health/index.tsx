@@ -1,7 +1,7 @@
 import { CircleAlert } from 'lucide-react'
 import { Fragment } from 'react'
 
-import { TypographyH6 } from '@/components/typography/h6'
+import { TypographyH3 } from '@/components/typography/h3'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Spinner } from '@/components/ui/spinner'
 import { usePersonClinicalHistory } from '@/hooks/use-query/use-person-clinical-history'
@@ -16,7 +16,7 @@ export function Health({ cpf }: { cpf: string }) {
   } = usePersonClinicalHistory(cpf)
   console.log({ error, isPending, clinicalHistory })
   return (
-    <div className="overflow-hidden">
+    <div className="container mx-auto p-4">
       {/* <div className="my-[2.125rem] flex items-center justify-between gap-3 px-24">
         <div className="rounded-lg border bg-accent px-3 py-4">
           <h3 className="leading-3.5 text-typography-dark-blue text-sm font-medium">
@@ -29,10 +29,8 @@ export function Health({ cpf }: { cpf: string }) {
           activeFilters={activeFilters}
         />
       </div> */}
-      <TypographyH6 className="mt-4 px-[4.5rem] text-muted-foreground">
-        Histórico Clínico
-      </TypographyH6>
-      <div className="mt-14 flex w-full flex-col gap-16 pl-[4.5rem] pr-8">
+      <TypographyH3 className="mb-3">Histórico Clínico</TypographyH3>
+      <div className="flex w-full flex-col gap-16 pl-14 pr-0">
         {clinicalHistory ? (
           clinicalHistory.length > 0 ? (
             clinicalHistory.map((item, index) => (
