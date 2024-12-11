@@ -94,7 +94,7 @@ export function ResultAlert({ cpf, open, setOpen }: ResultAlertProps) {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/pessoas')}
               disabled={!header || !profile}
             >
               Cancelar

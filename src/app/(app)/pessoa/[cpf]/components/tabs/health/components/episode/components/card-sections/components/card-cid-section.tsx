@@ -19,16 +19,12 @@ export function CardCIDSection({ cids }: CardCIDSectionProps) {
       className="flex cursor-default flex-col gap-2 rounded-lg border bg-card px-6 py-3"
       onClick={(e) => e.stopPropagation()}
     >
-      <span className="text-typography-dark-blue text-sm font-medium">
-        CIDs
-      </span>
+      <span className="text-sm font-medium">CIDs</span>
       <div className="flex flex-col gap-1">
         {cids.length > 0 ? (
           cids.map((cid, index) => (
             <div key={index} className="flex items-center gap-2">
-              <span className="text-typography-blue-gray-200 text-sm">
-                {cid.description}
-              </span>
+              <span className="text-sm">{cid.description}</span>
               <div
                 className={cn(
                   'flex rounded-lg border px-2 py-1',
@@ -50,7 +46,7 @@ export function CardCIDSection({ cids }: CardCIDSectionProps) {
             </div>
           ))
         ) : (
-          <span className="text-typography-blue-gray-200 text-sm">
+          <span className="text-sm text-muted-foreground">
             Não há registro de informações
           </span>
         )}

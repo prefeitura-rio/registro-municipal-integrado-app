@@ -1,6 +1,5 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { usePerson } from '@/hooks/use-query/use-person'
 import { calculateAge } from '@/utils/calculate-age'
@@ -16,7 +15,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       </CardHeader>
       <CardContent className="flex-grow overflow-auto">
         <div className="mb-4 flex items-center space-x-4">
-          <Avatar className="h-20 w-20">
+          {/* <Avatar className="h-20 w-20">
             <AvatarImage
               color="green"
               src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}&backgroundColor=43a047`}
@@ -28,7 +27,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
                 .map((n) => n[0])
                 .join('')}
             </AvatarFallback>
-          </Avatar>
+          </Avatar> */}
           <div>
             <h2 className="text-2xl font-bold">{name}</h2>
             <p className="text-gray-500">Engenheiro de Software</p>

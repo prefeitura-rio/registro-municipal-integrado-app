@@ -37,7 +37,7 @@ export default function PersonDetails() {
 
   if (profile)
     return (
-      <div className="flex h-dvh flex-col overflow-hidden p-2">
+      <div className="page">
         <ResultAlert cpf={cpf} open={openAlert} setOpen={setOpenAlert} />
         {!openAlert && (
           <>

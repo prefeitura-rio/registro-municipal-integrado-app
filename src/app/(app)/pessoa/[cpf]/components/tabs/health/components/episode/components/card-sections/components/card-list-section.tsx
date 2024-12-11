@@ -16,13 +16,11 @@ export function CardListSection({ title, items }: CardCIDSectionProps) {
         {items.length > 0 ? (
           items.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
-              <span className="text-typography-blue-gray-200 text-sm">
-                {item}
-              </span>
+              <span className="text-sm text-muted-foreground">{item}</span>
             </div>
           ))
         ) : (
-          <span className="text-typography-blue-gray-200 text-sm">
+          <span className="text-sm text-muted-foreground">
             Não há registro de informações
           </span>
         )}

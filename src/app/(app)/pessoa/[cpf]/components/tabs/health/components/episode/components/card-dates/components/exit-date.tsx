@@ -14,16 +14,16 @@ export function ExitDate({ date, deceased, provider }: ExitDateProps) {
 
   return (
     <div className="space-y-1">
-      <span className="text-typography-blue-gray-200 text-xs font-semibold leading-3">
+      <span className="text-xs font-semibold leading-3">
         {date ? (deceased ? 'Óbito' : 'Saída') : ''}
       </span>
       {date ? (
         <div className="flex h-10 w-48 justify-between rounded-lg border bg-card px-2">
           <div className="flex items-center gap-1.5">
-            <span className="leading-3.5 text-typography-dark-blue text-sm font-semibold">
+            <span className="leading-3.5 text-sm font-semibold">
               {format(date, 'dd.MM.y')}
             </span>
-            <span className="leading-3.5 text-typography-blue-gray-200/90 text-sm">
+            <span className="leading-3.5 text-sm text-foreground/90">
               {format(date, 'HH:mm')}
             </span>
           </div>
@@ -33,9 +33,7 @@ export function ExitDate({ date, deceased, provider }: ExitDateProps) {
         </div>
       ) : (
         <div className="flex h-10 w-48 items-center justify-center rounded-lg border bg-accent">
-          <span className="leading-3.5 text-typography-blue-gray-200 text-sm font-medium">
-            em andamento
-          </span>
+          <span className="leading-3.5 text-sm font-medium">em andamento</span>
         </div>
       )}
     </div>

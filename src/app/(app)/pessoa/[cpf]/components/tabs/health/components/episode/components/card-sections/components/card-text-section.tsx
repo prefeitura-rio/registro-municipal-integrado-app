@@ -24,23 +24,21 @@ export function CardTextSection({
       onClick={(e) => e.stopPropagation()}
     >
       <div className="flex items-center gap-2">
-        <span className="text-typography-dark-blue text-sm font-medium">
-          {title}
-        </span>
+        <span className="text-sm font-medium">{title}</span>
         {tooltip && (
           <Tooltip>
             <TooltipTrigger>
-              <Info className="text-typography-blue-gray-200 size-3.5 shrink-0" />
+              <Info className="size-3.5 shrink-0 text-muted-foreground" />
             </TooltipTrigger>
             <TooltipContent align="start">
-              <span className="text-typography-blue-gray-200 text-sm">
+              <span className="text-sm text-muted-foreground">
                 {tooltip || 'Não há registro de informações'}
               </span>
             </TooltipContent>
           </Tooltip>
         )}
       </div>
-      <span className="text-typography-blue-gray-200 text-sm">
+      <span className="text-sm text-muted-foreground">
         {children || 'Não há registro de informações'}
       </span>
     </div>

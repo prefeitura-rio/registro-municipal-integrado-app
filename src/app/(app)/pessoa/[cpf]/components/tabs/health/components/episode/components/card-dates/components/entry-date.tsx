@@ -12,7 +12,7 @@ interface EntryDateProps {
 export function EntryDate({ date, provider }: EntryDateProps) {
   return (
     <div className="space-y-1">
-      <span className="text-typography-blue-gray-200 text-xs font-semibold leading-3">
+      <span className="text-xs font-semibold leading-3">
         {provider === 'vitacare' ? 'Data de atendimento' : 'Entrada'}
       </span>
       <div
@@ -21,11 +21,11 @@ export function EntryDate({ date, provider }: EntryDateProps) {
         )}
       >
         <div className="flex items-center gap-1.5">
-          <span className="leading-3.5 text-typography-dark-blue text-sm font-semibold">
+          <span className="leading-3.5 text-sm font-semibold">
             {format(date, 'dd.MM.y')}
           </span>
           {provider !== 'vitacare' && (
-            <span className="leading-3.5 text-typography-blue-gray-200/90 text-sm">
+            <span className="leading-3.5 text-sm text-foreground/90">
               {format(date, 'HH:mm')}
             </span>
           )}
