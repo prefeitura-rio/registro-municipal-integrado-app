@@ -12,7 +12,7 @@ import {
 import InteractionDashboard from './components/interaction-dashboard'
 import InteractionTable from './components/interaction-table'
 
-export function SocialAssistance() {
+export function Servico1746() {
   const data = [
     {
       id_chamado: 'CH123456',

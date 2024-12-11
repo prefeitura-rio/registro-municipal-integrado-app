@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
+import { Servico1746 } from './1746'
 import { Education } from './education'
-import { Enterprises } from './enterprises'
 import { Health } from './health'
 import { SocialAssistance } from './social-assistance'
 import { Transportation } from './transport'
@@ -56,7 +56,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             <SocialAssistance />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="1746">
-            <Enterprises />
+            <Servico1746 />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="education">
             <Education />
