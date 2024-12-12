@@ -88,3 +88,39 @@ export type Metadata = {
     description: string
   }[]
 }
+
+export type Interaction1746 = {
+  id_chamado: string
+  id_origem_ocorrencia: string
+  data_inicio: string
+  data_fim: string
+  id_bairro: string
+  id_territorialidade: string
+  id_logradouro: string
+  numero_logradouro: string
+  id_unidade_organizacional: string
+  nome_unidade_organizacional: string
+  id_unidade_organizacional_mae: string
+  unidade_organizacional_ouvidoria: string
+  categoria: string
+  id_tipo: string
+  tipo: string
+  id_subtipo: string
+  subtipo: string
+  status: string
+  longitude: number
+  latitude: number
+  data_alvo_finalizacao: string
+  data_alvo_diagnostico: string
+  data_real_diagnostico: string
+  tempo_prazo: number
+  prazo_unidade: string
+  prazo_tipo: string
+  dentro_prazo: string
+  situacao: string
+  tipo_situacao: string
+  justificativa_status: string
+  reclamacoes: number
+  descricao: string
+  data_particao: string
+}

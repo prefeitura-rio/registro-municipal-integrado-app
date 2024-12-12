@@ -4,7 +4,7 @@ import { getPerson } from '@/http/person/get-person'
 
 export function usePerson(cpf: string) {
   return useQuery({
-    queryKey: ['person'],
+    queryKey: ['person', cpf],
     queryFn: () => getPerson(cpf),
   })
 }

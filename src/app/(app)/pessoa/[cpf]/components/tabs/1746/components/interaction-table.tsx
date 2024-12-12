@@ -26,8 +26,8 @@ interface Interaction {
   data_inicio: string
   tipo: string
   subtipo: string
-  status: string
-  dentro_prazo: string
+  descricao: string
+  tipo_situacao: string
 }
 
 interface InteractionTableProps {
@@ -43,7 +43,7 @@ const columns: ColumnDef<Interaction>[] = [
     accessorKey: 'data_inicio',
     header: 'Data de Início',
     cell: ({ row }) => {
-      return new Date(row.getValue('data_inicio')).toLocaleDateString()
+      return new Date(row.getValue('data_inicio')).toLocaleDateString('pt-BR')
     },
   },
   {
@@ -55,18 +55,16 @@ const columns: ColumnDef<Interaction>[] = [
     header: 'Subtipo',
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: 'descricao',
+    header: 'Descrição',
   },
   {
-    accessorKey: 'dentro_prazo',
-    header: 'Dentro do prazo',
+    accessorKey: 'tipo_situacao',
+    header: 'Situação',
   },
 ]
 
-export default function InteractionTable({
-  interactions,
-}: InteractionTableProps) {
+export function InteractionTable({ interactions }: InteractionTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
@@ -137,8 +135,8 @@ export default function InteractionTable({
       {interactions.length > 10 && (
         <Pagination
           className="mt-4"
-          page={1}
-          onPageChange={() => {}}
+          page={table.getPageCount()}
+          onPageChange={(pageIndex) => table.setPageIndex(pageIndex)}
           size={10}
           total={interactions.length}
         />
