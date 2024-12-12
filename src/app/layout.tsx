@@ -14,9 +14,9 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Cad Único | Rio',
+  title: 'Registro Municipal Integrado | Rio',
   description:
-    'Plataforma de visualização de dados do Cadastro Único da Prefeitura do Rio de Janeiro',
+    'Plataforma de visualização de dados integrados do Cidadão Carioca',
 }
 
 export default function RootLayout({

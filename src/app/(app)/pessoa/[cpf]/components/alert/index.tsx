@@ -35,7 +35,6 @@ export function ResultAlert({ cpf, open, setOpen }: ResultAlertProps) {
     isLoading: isHeaderLoading,
   } = usePerson(cpf)
   const { data: encounters } = usePersonClinicalHistory(cpf)
-  const name = header?.social_name || header?.registration_name || 'N/A'
 
   return (
     <AlertDialog open={open}>
@@ -48,11 +47,10 @@ export function ResultAlert({ cpf, open, setOpen }: ResultAlertProps) {
                 <>
                   <AlertDialogTitle>Dados sigilosos!</AlertDialogTitle>
                   <AlertDialogDescription className="text-justify">
-                    Prezado(a) Sr.(a) <span className="font-bold">{name}</span>,
-                    você <span className="font-bold">PRECISA</span> acessar esse
-                    Histórico Clínico? Os dados a seguir são sensíveis. É de sua
-                    responsabilidade garantir o sigilo sobre essas informações.
-                    Este ambiente é{' '}
+                    Prezado(a) Sr.(a){' '}
+                    <span className="font-bold">{profile.full_name}</span>, os
+                    dados a seguir são sensíveis. É de sua responsabilidade
+                    garantir o sigilo sobre essas informações. Este ambiente é{' '}
                     <span className="font-bold">MONITORADO</span>, e o uso
                     indevido ou compartilhamento não autorizado poderá resultar
                     em sanções legais.
@@ -60,10 +58,11 @@ export function ResultAlert({ cpf, open, setOpen }: ResultAlertProps) {
                 </>
               ) : (
                 <>
-                  <AlertDialogTitle>Paciente menor de idade</AlertDialogTitle>
+                  <AlertDialogTitle>Cidadão menor de idade</AlertDialogTitle>
                   <AlertDialogDescription className="text-justify">
-                    Prezado(a) Sr.(a) <span className="font-bold">{name}</span>,
-                    você <span className="font-bold">PRECISA</span> acessar esse
+                    Prezado(a) Sr.(a){' '}
+                    <span className="font-bold">{profile.full_name}</span>, você{' '}
+                    <span className="font-bold">PRECISA</span> acessar esse
                     Histórico Clínico? Os dados a seguir são sensíveis e
                     pertencem a um(a) paciente{' '}
                     <span className="font-bold">MENOR DE IDADE</span>. É de sua

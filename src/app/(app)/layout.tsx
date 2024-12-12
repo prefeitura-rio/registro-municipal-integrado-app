@@ -5,7 +5,7 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import { CustomQueryClientProvider } from '@/hooks/query-client-provider'
 import { isAuthenticated } from '@/utils/auth'
 
-import LogoutTimeOut from './components/logout-timeout'
+import LogoutTimeOut from '../../components/logout-timeout'
 
 export default async function AppLayout({
   children,

@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,9 +24,9 @@ export function BreadcrumbHeader({ items }: BreadcrumbHeaderProps) {
       <div className="header-separator" />
       <Breadcrumb>
         <BreadcrumbList>
-          {items.map((item, index) => {
-            if (item.href) {
-              return (
+          {items.map((item, index) => (
+            <Fragment key={index}>
+              {item.href ? (
                 <>
                   <BreadcrumbItem key={index}>
                     <BreadcrumbLink href={item.href}>
@@ -33,17 +35,15 @@ export function BreadcrumbHeader({ items }: BreadcrumbHeaderProps) {
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                 </>
-              )
-            } else {
-              return (
+              ) : (
                 <>
                   <BreadcrumbItem key={index}>
                     <BreadcrumbPage>{item.label}</BreadcrumbPage>
                   </BreadcrumbItem>
                 </>
-              )
-            }
-          })}
+              )}
+            </Fragment>
+          ))}
         </BreadcrumbList>
       </Breadcrumb>
     </header>
