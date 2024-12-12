@@ -12,9 +12,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { isApiError } from '@/lib/api'
-import type { Encounter } from '@/models/entities'
+import type { ClinicalEpisode } from '@/types/entities'
 import {
-  genericErrorMessage,
+  GENERIC_ERROR_MESSAGE,
   isForbiddenError,
   isNotFoundError,
   isTooManyRequests,
@@ -23,7 +23,7 @@ import {
 interface PatientAlertProps {
   headerError: Error | null
   isHeaderLoading: boolean
-  encounters: Encounter[] | undefined
+  encounters: ClinicalEpisode[] | undefined
 }
 export function PatientAlert({
   encounters,
@@ -65,7 +65,7 @@ export function PatientAlert({
       } else {
         setAlertContent({
           title: 'Erro inesperado',
-          description: genericErrorMessage,
+          description: GENERIC_ERROR_MESSAGE,
         })
       }
     }

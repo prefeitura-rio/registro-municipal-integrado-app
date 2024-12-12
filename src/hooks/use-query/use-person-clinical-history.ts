@@ -5,7 +5,7 @@ import { isTooManyRequests } from '@/utils/error-handlers'
 
 export function usePersonClinicalHistory(cpf: string) {
   return useQuery({
-    queryKey: ['patient', 'encounters', cpf],
+    queryKey: ['person', cpf, 'health', 'encounters'],
     queryFn: () => getPersonClinicalHistory(cpf),
     staleTime: Infinity,
     refetchOnWindowFocus: false,

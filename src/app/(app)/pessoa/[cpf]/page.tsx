@@ -28,12 +28,6 @@ export default function PersonDetails() {
 
   const [openAlert, setOpenAlert] = useState(true)
 
-  // useEffect(() => {
-  //   if (profile && !profile.is_use_terms_accepted) {
-  //     router.push('/')
-  //   }
-  // }, [profile, router])
-
   if (profile)
     return (
       <div className="page">

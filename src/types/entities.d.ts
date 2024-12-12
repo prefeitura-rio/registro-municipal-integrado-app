@@ -124,3 +124,67 @@ export type Interaction1746 = {
   descricao: string
   data_particao: string
 }
+
+export type CadUnicoInfo = {
+  id_membro_familia: string
+  id_familia: string
+  dados: {
+    cpf_valido_indicador: boolean
+    nome: string
+    raca_cor: string
+    sexo: string
+    municipio_nascimento: string
+    sigla_uf_municipio_nascimento: string
+    estado_cadastral: string
+    parentesco_responsavel_familia: string
+    data_nascimento: string
+    data_ultima_atualizacao: string
+    data_cadastro: string
+    nome_mae: string
+    nome_pai: string
+    condicao_rua: boolean
+    trabalho_infantil: string
+    numeros_membros_familia: number
+  }
+  deficiencia: {
+    tem_deficiencia: boolean
+    tipo_deficiencia: boolean
+  }
+  domicilio: {
+    especie_domicilio: string
+    iluminacao: string
+    comodosinteger
+    forma_abastecimento_agua: string
+    possui_agua_encanada: string
+    escoamento_sanitario: string
+    local: string
+    despesa_agua_esgoto: number
+    despesa_alimentacao: number
+    despesa_aluguel: number
+    despesa_energia: number
+    despesa_gas: number
+    despesa_transporte: number
+  }
+  escolaridade: {
+    sabe_ler_escrever: string
+    curso_mais_elevado_frequentou: string
+  }
+  membros: {
+    cpf: string
+    id_membro_familia: string
+    nome: string
+    parentesco_responsavel_familia: string
+  }[]
+  renda: {
+    renda_media_familia: number
+    renda_outras_rendas: number
+    renda_emprego_ultimo_mes: number
+    renda_aposentadoria: number
+    renda_bruta_12_meses: number
+    renda_doacao: number
+    renda_pensao_alimenticia: number
+    renda_seguro_desemprego: number
+    nao_recebe_remuneracao: number
+    funcao_principal_trabalho: number
+  }
+}
