@@ -52,8 +52,6 @@ api.interceptors.response.use(
     }
 
     if (isUnauthorizedError(error)) {
-      console.log('INTERCEPTOR 2')
-
       deleteCookie(ACCESS_TOKEN_COOKIE, { cookies: cookieStore })
       deleteCookie(ACCESS_TOKEN_EXPIRATION_DATE_COOKIE, {
         cookies: cookieStore,

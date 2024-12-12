@@ -9,12 +9,7 @@ import { usePersonClinicalHistory } from '@/hooks/use-query/use-person-clinical-
 import { EpisodeCard } from './components/episode'
 
 export function Health({ cpf }: { cpf: string }) {
-  const {
-    data: clinicalHistory,
-    error,
-    isPending,
-  } = usePersonClinicalHistory(cpf)
-  console.log({ error, isPending, clinicalHistory })
+  const { data: clinicalHistory } = usePersonClinicalHistory(cpf)
   return (
     <div className="container mx-auto p-4">
       {/* <div className="my-[2.125rem] flex items-center justify-between gap-3 px-24">
@@ -43,7 +38,7 @@ export function Health({ cpf }: { cpf: string }) {
                     ).getFullYear() && (
                     <div className="relative">
                       <div className="absolute -left-[70px] flex h-7 items-center justify-center rounded-lg border bg-card px-2.5">
-                        <span className="text-typography-blue-gray-200 text-sm">
+                        <span className="text-sm text-typography-blue-gray-200">
                           {new Date(
                             clinicalHistory[index + 1].entry_datetime,
                           ).getFullYear()}

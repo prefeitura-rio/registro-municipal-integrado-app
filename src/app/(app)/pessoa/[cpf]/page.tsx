@@ -15,7 +15,6 @@ import { TabsCard } from './components/tabs'
 export default function PersonDetails() {
   const pathName = usePathname()
   const router = useRouter()
-  console.log(pathName)
   const cpf = pathName.split('/').pop()
   if (!cpf) {
     router.back()
