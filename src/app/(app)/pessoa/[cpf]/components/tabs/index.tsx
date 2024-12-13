@@ -53,7 +53,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             className="flex-grow overflow-auto"
             value="social assistence"
           >
-            <SocialAssistance />
+            <SocialAssistance cpf={cpf} />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="1746">
             <Servico1746 cpf={cpf} />

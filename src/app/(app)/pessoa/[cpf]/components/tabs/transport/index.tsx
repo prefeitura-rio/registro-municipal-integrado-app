@@ -54,7 +54,7 @@ export function Transportation({ cpf }: { cpf: string }) {
         </TableBody>
       </Table>
       {isPending && (
-        <div className="flex gap-2">
+        <div className="mt-2 flex gap-2">
           <Spinner />
           <span className="text-muted-foreground">Carregando histórico...</span>
         </div>
