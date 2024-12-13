@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { TypographyH3 } from '@/components/typography/h3'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Spinner } from '@/components/ui/spinner'
 import { useCadUnicoInfo } from '@/hooks/use-query/use-cad-unico-info'
 import { usePerson } from '@/hooks/use-query/use-person'
 import { calculateAge } from '@/utils/calculate-age'
@@ -25,8 +26,8 @@ type Data = {
 }[]
 
 export function SocialAssistance({ cpf }: { cpf: string }) {
-  const { data: health } = usePerson(cpf)
-  const { data: cadUnico } = useCadUnicoInfo(cpf)
+  const { data: health, isPending: isHealthPending } = usePerson(cpf)
+  const { data: cadUnico, isPending: isCadUnicoPending } = useCadUnicoInfo(cpf)
   const citizen = {
     ...cadUnico,
     ...health,
@@ -138,14 +139,8 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
           ),
         },
         {
-          label: 'Não Recebe Remuneração',
-          value: citizen.renda?.nao_recebe_remuneracao?.toLocaleString(
-            'pt-BR',
-            {
-              style: 'currency',
-              currency: 'BRL',
-            },
-          ),
+          label: 'Recebe Remuneração',
+          value: citizen.renda?.nao_recebe_remuneracao === 1 ? 'Não' : 'Sim',
         },
         {
           label: 'Função Principal no Trabalho',
@@ -214,8 +209,8 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
   ]
 
   return (
-    <div className="mx-auto p-4">
-      <TypographyH3 className="mb-3">Dados do Cad Único</TypographyH3>
+    <div className="container mx-auto p-4">
+      <TypographyH3 className="mb-3">Dados do CadÚnico</TypographyH3>
       <div className="grid gap-4 md:grid-cols-2">
         {data.map((item, index) => (
           <Card key={index} className={`col-span-${item.colSpan} w-full`}>
@@ -237,6 +232,12 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
             </CardContent>
           </Card>
         ))}
+        {(isHealthPending || isCadUnicoPending) && (
+          <div className="flex items-center gap-2">
+            <Spinner />
+            <span>Carregando Dados...</span>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -30,7 +30,6 @@ export function Transportation({ cpf }: { cpf: string }) {
             <TableHead>Hora</TableHead>
             <TableHead>Modo</TableHead>
             <TableHead>Serviço</TableHead>
-            <TableHead>Sentido</TableHead>
             <TableHead>Valor</TableHead>
           </TableRow>
         </TableHeader>
@@ -45,7 +44,6 @@ export function Transportation({ cpf }: { cpf: string }) {
               </TableCell>
               <TableCell>{event.modo}</TableCell>
               <TableCell>{event.descricao_servico_jae}</TableCell>
-              <TableCell>{event.sentido}</TableCell>
               <TableCell className="text-nowrap">
                 R$ {event.valor_transacao.toFixed(2)}
               </TableCell>
@@ -54,7 +52,7 @@ export function Transportation({ cpf }: { cpf: string }) {
         </TableBody>
       </Table>
       {isPending && (
-        <div className="mt-2 flex gap-2">
+        <div className="mt-3 flex items-center gap-2">
           <Spinner />
           <span className="text-muted-foreground">Carregando histórico...</span>
         </div>
