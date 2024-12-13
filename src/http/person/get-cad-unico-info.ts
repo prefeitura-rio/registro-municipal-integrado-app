@@ -1,5 +1,3 @@
-'use server'
-
 import { api } from '@/lib/api'
 import type { CadUnicoInfo } from '@/types/entities'
 

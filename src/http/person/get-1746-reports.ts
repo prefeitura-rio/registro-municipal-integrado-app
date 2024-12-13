@@ -1,5 +1,3 @@
-'use server'
-
 import { api } from '@/lib/api'
 import type { Interaction1746 } from '@/types/entities'
 

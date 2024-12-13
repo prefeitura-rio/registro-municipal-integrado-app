@@ -44,7 +44,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             <TabsTrigger value="education">Educação</TabsTrigger>
           </TabsList>
           <TabsContent value="transport" className="flex-grow overflow-auto">
-            <Transportation />
+            <Transportation cpf={cpf} />
           </TabsContent>
           <TabsContent value="health" className="flex-grow overflow-auto">
             <Health cpf={cpf} />

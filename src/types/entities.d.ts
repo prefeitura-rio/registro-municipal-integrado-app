@@ -63,9 +63,9 @@ export type ClinicalEpisode = {
   clinical_motivation: string | null
   clinical_outcome: string | null
   filter_tags: string[]
-  exhibition_type: 'clinical_exam' | 'default'
+  exhibition_type: string
   clinical_exams: {
-    type: 'Laboratório' | 'Imagem'
+    type: string
     description: string
   }[]
   exibicao: {
@@ -187,4 +187,33 @@ export type CadUnicoInfo = {
     nao_recebe_remuneracao: number
     funcao_principal_trabalho: number
   }
+}
+
+export type PublicTransportEvent = {
+  data: string
+  hora: number
+  datetime_transacao: string
+  datetime_processamento: string
+  datetime_captura: string
+  modo: string
+  id_consorcio: string
+  consorcio: string
+  id_operadora: string
+  operadora: string
+  id_servico_jae: string
+  servico_jae: string
+  descricao_servico_jae: string
+  sentido: string
+  id_veiculo: string
+  id_validador: string
+  id_transacao: string
+  tipo_pagamento: string
+  tipo_transacao: string
+  tipo_transacao_smtr: string
+  tipo_gratuidade: string
+  latitude: number
+  longitude: number
+  valor_transacao: number
+  versao: string
+  datetime_ultima_atualizacao: string
 }
