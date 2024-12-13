@@ -63,9 +63,9 @@ export type ClinicalEpisode = {
   clinical_motivation: string | null
   clinical_outcome: string | null
   filter_tags: string[]
-  exhibition_type: 'clinical_exam' | 'default'
+  exhibition_type: string
   clinical_exams: {
-    type: 'Laboratório' | 'Imagem'
+    type: string
     description: string
   }[]
   exibicao: {
@@ -126,24 +126,24 @@ export type Interaction1746 = {
 }
 
 export type CadUnicoInfo = {
-  id_membro_familia: string
-  id_familia: string
+  id_membro_familia: string | null
+  id_familia: string | null
   dados: {
     cpf_valido_indicador: boolean
-    nome: string
-    raca_cor: string
-    sexo: string
-    municipio_nascimento: string
-    sigla_uf_municipio_nascimento: string
-    estado_cadastral: string
-    parentesco_responsavel_familia: string
-    data_nascimento: string
-    data_ultima_atualizacao: string
-    data_cadastro: string
-    nome_mae: string
-    nome_pai: string
-    condicao_rua: boolean
-    trabalho_infantil: string
+    nome: string | null
+    raca_cor: string | null
+    sexo: string | null
+    municipio_nascimento: string | null
+    sigla_uf_municipio_nascimento: string | null
+    estado_cadastral: string | null
+    parentesco_responsavel_familia: string | null
+    data_nascimento: string | null
+    data_ultima_atualizacao: string | null
+    data_cadastro: string | null
+    nome_mae: string | null
+    nome_pai: string | null
+    condicao_rua: boolean | null
+    trabalho_infantil: string | null
     numeros_membros_familia: number
   }
   deficiencia: {
@@ -153,7 +153,7 @@ export type CadUnicoInfo = {
   domicilio: {
     especie_domicilio: string
     iluminacao: string
-    comodosinteger
+    comodos: number
     forma_abastecimento_agua: string
     possui_agua_encanada: string
     escoamento_sanitario: string
@@ -176,15 +176,44 @@ export type CadUnicoInfo = {
     parentesco_responsavel_familia: string
   }[]
   renda: {
-    renda_media_familia: number
-    renda_outras_rendas: number
-    renda_emprego_ultimo_mes: number
-    renda_aposentadoria: number
-    renda_bruta_12_meses: number
-    renda_doacao: number
-    renda_pensao_alimenticia: number
-    renda_seguro_desemprego: number
-    nao_recebe_remuneracao: number
-    funcao_principal_trabalho: number
+    renda_media_familia: number | null
+    renda_outras_rendas: number | null
+    renda_emprego_ultimo_mes: number | null
+    renda_aposentadoria: number | null
+    renda_bruta_12_meses: number | null
+    renda_doacao: number | null
+    renda_pensao_alimenticia: number | null
+    renda_seguro_desemprego: number | null
+    nao_recebe_remuneracao: number | null
+    funcao_principal_trabalho: number | null
   }
+}
+
+export type PublicTransportEvent = {
+  data: string
+  hora: number
+  datetime_transacao: string
+  datetime_processamento: string
+  datetime_captura: string
+  modo: string
+  id_consorcio: string
+  consorcio: string
+  id_operadora: string
+  operadora: string
+  id_servico_jae: string
+  servico_jae: string
+  descricao_servico_jae: string
+  sentido: string
+  id_veiculo: string
+  id_validador: string
+  id_transacao: string
+  tipo_pagamento: string
+  tipo_transacao: string
+  tipo_transacao_smtr: string
+  tipo_gratuidade: string
+  latitude: number
+  longitude: number
+  valor_transacao: number
+  versao: string
+  datetime_ultima_atualizacao: string
 }

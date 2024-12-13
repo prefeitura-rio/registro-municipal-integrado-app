@@ -1,5 +1,10 @@
 import type { ColumnDef } from '@tanstack/react-table'
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import type { Interaction1746 } from '@/types/entities'
 
 export const columns: ColumnDef<Interaction1746>[] = [
@@ -25,6 +30,16 @@ export const columns: ColumnDef<Interaction1746>[] = [
   {
     accessorKey: 'descricao',
     header: 'Descrição',
+    cell: ({ row }) => (
+      <Tooltip>
+        <TooltipTrigger>
+          <p className="line-clamp-1">{row.original.descricao}</p>
+        </TooltipTrigger>
+        <TooltipContent className="w-96 p-6">
+          <p>{row.original.descricao}</p>
+        </TooltipContent>
+      </Tooltip>
+    ),
   },
   {
     accessorKey: 'tipo_situacao',

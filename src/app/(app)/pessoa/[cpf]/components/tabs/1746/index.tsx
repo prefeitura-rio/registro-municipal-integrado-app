@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { DataTable } from '@/components/ui/data-table'
+import { Spinner } from '@/components/ui/spinner'
 import { use1746Reports } from '@/hooks/use-query/use-1746-reports'
 
 import { columns } from './components/columns'
@@ -21,7 +22,12 @@ export function Servico1746({ cpf }: { cpf: string }) {
         Interações com o Serviço 1746
       </TypographyH3>
       {reports1746 && <Dashboard data={reports1746} />}
-      {isPending && <div>Carregando dashboard...</div>}
+      {isPending && (
+        <div className="flex items-center gap-2">
+          <Spinner />
+          <span>Carregando dashboard...</span>
+        </div>
+      )}
       <Card className="mt-8">
         <CardHeader>
           <CardTitle>Histórico de Interações</CardTitle>
@@ -38,7 +44,12 @@ export function Servico1746({ cpf }: { cpf: string }) {
               data={reports1746}
             />
           )}
-          {isPending && <div>Carregando tabela...</div>}
+          {isPending && (
+            <div className="flex items-center gap-2">
+              <Spinner />
+              <span>Carregando Tabela...</span>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
