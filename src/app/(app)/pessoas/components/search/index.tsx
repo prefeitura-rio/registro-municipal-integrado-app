@@ -8,7 +8,7 @@ export function Search() {
           <h2 className="text-center text-2xl font-semibold leading-6 tracking-tight text-primary">
             Buscar por CPF
           </h2>
-          <span className="text-typography-blue-gray-200 text-center">
+          <span className="text-center text-typography-blue-gray-200">
             Insira um CPF para realizar a busca
           </span>
         </div>
@@ -22,7 +22,7 @@ export function Search() {
     <h2 className="text-center text-2xl font-semibold leading-6 tracking-tight text-primary">
       Buscar por CPF
     </h2>
-    <span className="text-typography-blue-gray-200 text-center">
+    <span className="text-center text-typography-blue-gray-200">
       Insira um CPF para realizar a busca
     </span>
   </div>
