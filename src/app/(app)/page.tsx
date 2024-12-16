@@ -12,86 +12,69 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-// import {
-//   Table,
-//   TableBody,
-//   TableCaption,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow,
-// } from '@/components/ui/table'
 
 const cardsData = [
-  { title: 'Pessoas cadastradas', value: 4.8, unit: 'Milhões' },
-  { title: 'Registros clínicos', value: 1.3, unit: 'Milhões' },
+  { title: 'Pessoas Cadastradas', value: 7.8, unit: 'Milhões' },
+  { title: 'Registros Clínicos', value: 100, unit: 'Milhões' },
   {
     title: 'Demandas',
     description: 'nos cais de atendimento da prefeitura',
-    value: 4.8,
+    value: 24.7,
     unit: 'Milhões',
   },
-  { title: 'Famílias no CadÚnico', value: 4.8, unit: 'Milhões' },
-  { title: 'Bilhetagens do JAÉ', value: 4.8, unit: 'Milhões' },
+  { title: 'Famílias no CadÚnico', value: 1.7, unit: 'Milhão' },
+  { title: 'Bilhetagens do JAÉ', value: 2.6, unit: 'Milhões' },
 ]
-
-// const tableData = [
-//   {
-//     Secretaria: 'Secretaria do Transporte',
-//     Dados: 'Bilhetagens no JAÉ',
-//     Status: 'Disponível',
-//   },
-//   {
-//     Secretaria: 'Secretaria da Educação',
-//     Dados: '',
-//     Status: 'Sem dados',
-//   },
-//   {
-//     Secretaria: 'Secretaria da Saúde',
-//     Dados: 'Histórico Clínico',
-//     Status: 'Sem dados',
-//   },
-// ]
 
 const secretarias = [
   {
     name: 'Saúde',
-    integrationProgress: 75,
     dataCategories: [
-      { name: 'Registros de Pacientes', status: 'integrated' },
-      { name: 'Histórico de Vacinação', status: 'integrated' },
-      { name: 'Agendamentos', status: 'pending' },
-      { name: 'Estoque de Medicamentos', status: 'not-started' },
+      { name: 'Histórico Clínico', status: 'Integrado' },
+      { name: 'Histórico de Vacinação', status: 'Integrado' },
+      { name: 'Medicamentos Retirados', status: 'Pendente' },
+      {
+        name: 'Alvará e Multas da Vigilância Sanitária',
+        status: 'Não Iniciado',
+      },
     ],
   },
   {
     name: 'Educação',
-    integrationProgress: 60,
     dataCategories: [
-      { name: 'Matrículas Escolares', status: 'integrated' },
-      { name: 'Notas dos Alunos', status: 'integrated' },
-      { name: 'Frequência Escolar', status: 'pending' },
-      { name: 'Transporte Escolar', status: 'not-started' },
+      { name: 'Matrículas Escolares', status: 'Não Iniciado' },
+      { name: 'Histórico Escolar', status: 'Não Iniciado' },
+      { name: 'Frequência Escolar', status: 'Não Iniciado' },
     ],
   },
   {
     name: 'Transporte',
-    integrationProgress: 40,
     dataCategories: [
-      { name: 'Rotas de Ônibus', status: 'integrated' },
-      { name: 'Bilhetagem Eletrônica', status: 'pending' },
-      { name: 'Manutenção de Veículos', status: 'not-started' },
-      { name: 'Semáforos Inteligentes', status: 'not-started' },
+      { name: 'Bilhetagem JAÉ', status: 'Integrado' },
+      { name: 'Bilhetagem RioCard', status: 'Pendente' },
     ],
   },
   {
     name: 'Assistência Social',
-    integrationProgress: 80,
     dataCategories: [
-      { name: 'Cadastro Único', status: 'integrated' },
-      { name: 'Programas Sociais', status: 'integrated' },
-      { name: 'Atendimentos Realizados', status: 'integrated' },
-      { name: 'Abrigos Municipais', status: 'pending' },
+      { name: 'Cadastro Único', status: 'Integrado' },
+      { name: 'Programa Seguir em Frente', status: 'Não Iniciado' },
+    ],
+  },
+  {
+    name: '1746',
+    dataCategories: [
+      { name: 'Histórico de Solicitações', status: 'Integrado' },
+    ],
+  },
+  {
+    name: 'Fazenda',
+    dataCategories: [
+      { name: 'Ergon', status: 'Pendente' },
+      { name: 'ISS', status: 'Não Iniciado' },
+      { name: 'Nota Carioca', status: 'Não Iniciado' },
+      { name: 'IPTU', status: 'Não Iniciado' },
+      { name: 'ITBI', status: 'Não Iniciado' },
     ],
   },
 ]
@@ -119,38 +102,12 @@ export default function Page() {
           </Card>
         ))}
       </div>
-      {/* <Table className="mt-10">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[400px]">Secretaria</TableHead>
-            <TableHead>Dados</TableHead>
-            <TableHead className="text-right">Situação</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {tableData.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell className="font-medium">{row.Secretaria}</TableCell>
-              <TableCell>{row.Dados}</TableCell>
-              <TableCell className="text-right">
-                <Badge
-                  variant={
-                    row.Status === 'Disponível' ? 'success' : 'destructive'
-                  }
-                >
-                  {row.Status}
-                </Badge>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table> */}
+
       <div className="mt-10 grid grid-cols-2 gap-6 xl:grid-cols-3">
         {secretarias.map((secretaria) => (
           <Card key={secretaria.name}>
             <CardHeader>
               <CardTitle>{secretaria.name}</CardTitle>
-              {/* <CardDescription>Detalhes da integração de dados</CardDescription> */}
             </CardHeader>
             <CardContent>
               <ul className="space-y-2">
@@ -162,27 +119,23 @@ export default function Page() {
                     <span>{category.name}</span>
                     <Badge
                       variant={
-                        category.status === 'integrated'
+                        category.status === 'Integrado'
                           ? 'success'
-                          : category.status === 'pending'
+                          : category.status === 'Pendente'
                             ? 'warning'
                             : 'destructive'
                       }
                     >
-                      {category.status === 'integrated' && (
+                      {category.status === 'Integrado' && (
                         <CheckCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status === 'pending' && (
+                      {category.status === 'Pendente' && (
                         <AlertCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status === 'not-started' && (
+                      {category.status === 'Não Iniciado' && (
                         <XCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status === 'integrated'
-                        ? 'Integrado'
-                        : category.status === 'pending'
-                          ? 'Pendente'
-                          : 'Não Iniciado'}
+                      {category.status}
                     </Badge>
                   </li>
                 ))}
