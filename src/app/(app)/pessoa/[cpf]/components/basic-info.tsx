@@ -26,6 +26,7 @@ type cardContentItem =
 type Data = {
   cardTitle: string
   cardContent: cardContentItem[]
+  visible: boolean
 }[]
 
 export function BasicInfo({ cpf }: { cpf: string }) {
@@ -37,6 +38,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
   const data: Data = [
     {
       cardTitle: 'Dados Pessoais',
+      visible: true,
       cardContent: [
         {
           label: 'CPF',
@@ -93,6 +95,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
     },
     {
       cardTitle: 'Saúde',
+      visible: !!health?.equipe_saude_familia?.at(0)?.clinica_familia.nome,
       cardContent: [
         {
           label: 'Unidade de Saúde',
@@ -102,6 +105,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
     },
     {
       cardTitle: 'Transporte',
+      visible: !!transport && transport.length > 0,
       cardContent: [
         {
           label: 'Gratuidade',
@@ -135,42 +139,47 @@ export function BasicInfo({ cpf }: { cpf: string }) {
         </div>
         {health && cadUnico && (
           <div className="space-y-4">
-            {data.map((item, index) => (
-              <Card key={index} className="w-full">
+            {data.map(
+              (item, index) =>
+                item.visible && (
+                  <Card key={index} className="w-full">
+                    <CardHeader>
+                      <CardTitle>{item.cardTitle}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {item.cardContent.map((item, index) => (
+                        <Fragment key={index}>
+                          {'reactNode' in item
+                            ? item.reactNode
+                            : !!item.value && (
+                                <p key={index}>
+                                  <strong>{item.label}:</strong> {item.value}
+                                </p>
+                              )}
+                        </Fragment>
+                      ))}
+                    </CardContent>
+                  </Card>
+                ),
+            )}
+            {cadUnico.membros.length > 0 && (
+              <Card className="w-full">
                 <CardHeader>
-                  <CardTitle>{item.cardTitle}</CardTitle>
+                  <CardTitle>Família</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {item.cardContent.map((item, index) => (
-                    <Fragment key={index}>
-                      {'reactNode' in item
-                        ? item.reactNode
-                        : !!item.value && (
-                            <p key={index}>
-                              <strong>{item.label}:</strong> {item.value}
-                            </p>
-                          )}
-                    </Fragment>
+                  {cadUnico?.membros.map((member, index) => (
+                    <Button
+                      key={index}
+                      variant="link"
+                      className="block h-auto p-0"
+                    >
+                      <Link href={`/pessoa/${member.cpf}`}>{member.nome}</Link>
+                    </Button>
                   ))}
                 </CardContent>
               </Card>
-            ))}
-            <Card className="w-full">
-              <CardHeader>
-                <CardTitle>Família</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {cadUnico?.membros.map((member, index) => (
-                  <Button
-                    key={index}
-                    variant="link"
-                    className="block h-auto p-0"
-                  >
-                    <Link href={`/pessoa/${member.cpf}`}>{member.nome}</Link>
-                  </Button>
-                ))}
-              </CardContent>
-            </Card>
+            )}
           </div>
         )}
         {(isHealthPending || isCadUnicoPending) && (

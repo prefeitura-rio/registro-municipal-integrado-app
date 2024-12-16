@@ -16,11 +16,11 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   const mapWidth = 1000
   const mapHeight = 330
 
-  const { data } = usePublicTransportHistory(cpf)
+  const { data, isPending } = usePublicTransportHistory(cpf)
 
   function createMarkerPart(point: PublicTransportEvent) {
     if (point.longitude === 0 && point.latitude === 0) return ''
-
+    console.log({ point })
     const name = 'pin-s'
     const color = '000000'
     const lon = point.longitude.toString()
@@ -41,6 +41,7 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   }
 
   function createViewport(point: PublicTransportEvent) {
+    console.log({ point })
     const lon = point.longitude.toString()
     const lat = point.latitude.toString()
     const zoom = '13'
@@ -51,7 +52,8 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   }
 
   const mapboxImageUrl = useMemo(() => {
-    if (!data) return undefined
+    if (!data || data.length === 0) return undefined
+    console.log({ data })
 
     const markers = getMarkers(data)
 
@@ -73,14 +75,14 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
           height={mapHeight}
           priority
         />
-      ) : (
+      ) : isPending ? (
         <div
           className="flex items-center justify-center bg-secondary"
           style={{ width: mapWidth, height: mapHeight }}
         >
           <Spinner />
         </div>
-      )}
+      ) : null}
     </div>
   )
 }
