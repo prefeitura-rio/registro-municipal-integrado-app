@@ -10,9 +10,9 @@ import { DataTable } from '@/components/ui/data-table'
 import { Spinner } from '@/components/ui/spinner'
 import { use1746Reports } from '@/hooks/use-query/use-1746-reports'
 
+import { TableSkeleton } from '../../../../../../../components/table-skeleton'
 import { columns } from './components/columns'
 import { Dashboard } from './components/dashboard'
-import { TableSkeleton } from './components/table-skeleton'
 
 export function Servico1746({ cpf }: { cpf: string }) {
   const { data: reports1746, isPending } = use1746Reports(cpf)
