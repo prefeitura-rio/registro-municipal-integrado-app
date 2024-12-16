@@ -13,7 +13,7 @@ const MAPBOX_ACCESS_TOKEN =
 export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   const accessToken = MAPBOX_ACCESS_TOKEN
   const mapStyle = 'mapbox/streets-v12'
-  const mapWidth = 480
+  const mapWidth = 1000
   const mapHeight = 330
 
   const { data } = usePublicTransportHistory(cpf)
