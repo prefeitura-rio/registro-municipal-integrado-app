@@ -77,11 +77,18 @@ const secretarias = [
       { name: 'ITBI', status: 'Não Iniciado' },
     ],
   },
+  {
+    name: 'Segurança',
+    dataCategories: [
+      { name: 'Histórico Criminal', status: 'Não Iniciado' },
+      { name: 'Maria da Penha', status: 'Não Iniciado' },
+    ],
+  },
 ]
 
 export default function Page() {
   return (
-    <div className="page p-6">
+    <div className="page overflow-y-auto p-6">
       <BreadcrumbHeader items={[{ label: 'Início' }]} />
       <TypographyH3 className="mb-3">Visão Geral de Integração</TypographyH3>
       <div className="grid grid-cols-3 gap-6 xl:grid-cols-5">
