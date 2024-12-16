@@ -273,3 +273,18 @@ export type PublicTransportEvent = {
   versao: string
   datetime_ultima_atualizacao: string
 }
+
+export type PublicTransportFrequentRoute = [
+  {
+    hora: number
+    bairro: string
+    sentido: 'ida'
+    quantidade: number
+  },
+  {
+    hora: number
+    bairro: string
+    sentido: 'volta'
+    quantidade: number
+  },
+]

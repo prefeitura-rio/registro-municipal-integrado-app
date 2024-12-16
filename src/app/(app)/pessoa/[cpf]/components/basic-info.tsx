@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Spinner } from '@/components/ui/spinner'
 import { useCadUnicoInfo } from '@/hooks/use-query/use-cad-unico-info'
 import { usePerson } from '@/hooks/use-query/use-person'
+import { usePublicTransportFrequentRoutes } from '@/hooks/use-query/use-public-transport-frequent-route'
 import { usePublicTransportHistory } from '@/hooks/use-query/use-public-transport-history'
 import { calculateAge } from '@/utils/calculate-age'
 
@@ -30,6 +31,7 @@ type Data = {
 export function BasicInfo({ cpf }: { cpf: string }) {
   const { data: health, isPending: isHealthPending } = usePerson(cpf)
   const { data: transport } = usePublicTransportHistory(cpf)
+  const { data: frequentRoutes } = usePublicTransportFrequentRoutes(cpf)
   const { data: cadUnico, isPending: isCadUnicoPending } = useCadUnicoInfo(cpf)
 
   const data: Data = [
@@ -106,6 +108,10 @@ export function BasicInfo({ cpf }: { cpf: string }) {
           value:
             transport?.find((item) => item.tipo_transacao === 'Gratuidade')
               ?.tipo_gratuidade || 'Não',
+        },
+        {
+          label: 'Trajeto mais recorrente',
+          value: `${frequentRoutes?.at(0)?.bairro} - ${frequentRoutes?.at(1)?.bairro}`,
         },
       ],
     },
