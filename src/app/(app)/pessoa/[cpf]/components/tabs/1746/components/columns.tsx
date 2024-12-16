@@ -32,7 +32,7 @@ export const columns: ColumnDef<Interaction1746>[] = [
     header: 'Descrição',
     cell: ({ row }) => (
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger className="text-start">
           <p className="line-clamp-1">{row.original.descricao}</p>
         </TooltipTrigger>
         <TooltipContent className="w-96 p-6">
