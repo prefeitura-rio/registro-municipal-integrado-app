@@ -6,8 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Spinner } from '@/components/ui/spinner'
 import { useCadUnicoInfo } from '@/hooks/use-query/use-cad-unico-info'
-import { usePerson } from '@/hooks/use-query/use-person'
-import { calculateAge } from '@/utils/calculate-age'
 
 type cardContentItem =
   | {
@@ -26,14 +24,7 @@ type Data = {
 }[]
 
 export function SocialAssistance({ cpf }: { cpf: string }) {
-  const { data: health, isPending: isHealthPending } = usePerson(cpf)
   const { data: cadUnico, isPending: isCadUnicoPending } = useCadUnicoInfo(cpf)
-  const citizen = {
-    ...cadUnico,
-    ...health,
-    name: health?.social_name || health?.registration_name || 'N/A',
-    age: health?.birth_date ? calculateAge(health?.birth_date) : 'N/A',
-  }
 
   const data: Data = [
     {
@@ -47,24 +38,24 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
               <strong>Estado Cadastral:</strong>
               <Badge
                 variant={
-                  citizen.dados?.estado_cadastral ? 'success' : 'warning'
+                  cadUnico?.dados?.estado_cadastral ? 'success' : 'warning'
                 }
               >
-                {citizen.dados?.estado_cadastral}
+                {cadUnico?.dados?.estado_cadastral}
               </Badge>
             </div>
           ),
         },
         {
           label: 'Data de Cadastro',
-          value: citizen.dados?.data_cadastro
-            ? formatDate(citizen.dados?.data_cadastro, 'dd/MM/y HH:mm:ss')
+          value: cadUnico?.dados?.data_cadastro
+            ? formatDate(cadUnico?.dados?.data_cadastro, 'dd/MM/y HH:mm:ss')
             : 'N/A',
         },
         {
           label: 'Última Atualização',
-          value: citizen.dados?.data_cadastro
-            ? formatDate(citizen.dados?.data_cadastro, 'dd/MM/y HH:mm:ss')
+          value: cadUnico?.dados?.data_cadastro
+            ? formatDate(cadUnico?.dados?.data_cadastro, 'dd/MM/y HH:mm:ss')
             : 'N/A',
         },
       ],
@@ -75,21 +66,21 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'Renda Média Familiar',
-          value: citizen.renda?.renda_media_familia?.toLocaleString('pt-BR', {
+          value: cadUnico?.renda?.renda_media_familia?.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }),
         },
         {
           label: 'Outras Rendas',
-          value: citizen.renda?.renda_outras_rendas?.toLocaleString('pt-BR', {
+          value: cadUnico?.renda?.renda_outras_rendas?.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }),
         },
         {
           label: 'Renda do Emprego no Último Mês',
-          value: citizen.renda?.renda_emprego_ultimo_mes?.toLocaleString(
+          value: cadUnico?.renda?.renda_emprego_ultimo_mes?.toLocaleString(
             'pt-BR',
             {
               style: 'currency',
@@ -99,28 +90,31 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
         },
         {
           label: 'Renda de Aposentadoria',
-          value: citizen.renda?.renda_aposentadoria?.toLocaleString('pt-BR', {
+          value: cadUnico?.renda?.renda_aposentadoria?.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }),
         },
         {
           label: 'Renda Bruta dos Últimos 12 Meses',
-          value: citizen.renda?.renda_bruta_12_meses?.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          }),
+          value: cadUnico?.renda?.renda_bruta_12_meses?.toLocaleString(
+            'pt-BR',
+            {
+              style: 'currency',
+              currency: 'BRL',
+            },
+          ),
         },
         {
           label: 'Renda de Doações',
-          value: citizen.renda?.renda_doacao?.toLocaleString('pt-BR', {
+          value: cadUnico?.renda?.renda_doacao?.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL',
           }),
         },
         {
           label: 'Pensão Alimentícia',
-          value: citizen.renda?.renda_pensao_alimenticia?.toLocaleString(
+          value: cadUnico?.renda?.renda_pensao_alimenticia?.toLocaleString(
             'pt-BR',
             {
               style: 'currency',
@@ -130,7 +124,7 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
         },
         {
           label: 'Seguro Desemprego',
-          value: citizen.renda?.renda_seguro_desemprego?.toLocaleString(
+          value: cadUnico?.renda?.renda_seguro_desemprego?.toLocaleString(
             'pt-BR',
             {
               style: 'currency',
@@ -140,11 +134,11 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
         },
         {
           label: 'Recebe Remuneração',
-          value: citizen.renda?.nao_recebe_remuneracao === 1 ? 'Não' : 'Sim',
+          value: cadUnico?.renda?.nao_recebe_remuneracao === 1 ? 'Não' : 'Sim',
         },
         {
           label: 'Função Principal no Trabalho',
-          value: citizen.renda?.funcao_principal_trabalho,
+          value: cadUnico?.renda?.funcao_principal_trabalho,
         },
       ],
     },
@@ -154,55 +148,55 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'Espécie do Domicílio',
-          value: citizen.domicilio?.especie_domicilio,
+          value: cadUnico?.domicilio?.especie_domicilio,
         },
         {
           label: 'Iluminação',
-          value: citizen.domicilio?.iluminacao,
+          value: cadUnico?.domicilio?.iluminacao,
         },
         {
           label: 'Cômodos',
-          value: citizen.domicilio?.comodos,
+          value: cadUnico?.domicilio?.comodos,
         },
         {
           label: 'Forma de Abastecimento de Água',
-          value: citizen.domicilio?.forma_abastecimento_agua,
+          value: cadUnico?.domicilio?.forma_abastecimento_agua,
         },
         {
           label: 'Possui Água Encanada',
-          value: citizen.domicilio?.possui_agua_encanada,
+          value: cadUnico?.domicilio?.possui_agua_encanada,
         },
         {
           label: 'Escoamento Sanitário',
-          value: citizen.domicilio?.escoamento_sanitario,
+          value: cadUnico?.domicilio?.escoamento_sanitario,
         },
         {
           label: 'Local',
-          value: citizen.domicilio?.local,
+          value: cadUnico?.domicilio?.local,
         },
         {
           label: 'Despesa com Água e Esgoto',
-          value: citizen.domicilio?.despesa_agua_esgoto,
+          value: cadUnico?.domicilio?.despesa_agua_esgoto,
         },
         {
           label: 'Despesa com Alimentação',
-          value: citizen.domicilio?.despesa_alimentacao,
+          value: cadUnico?.domicilio?.despesa_alimentacao,
         },
         {
           label: 'Despesa com Aluguel',
-          value: citizen.domicilio?.despesa_aluguel,
+          value: cadUnico?.domicilio?.despesa_aluguel,
         },
         {
           label: 'Despesa com Energia',
-          value: citizen.domicilio?.despesa_energia,
+          value: cadUnico?.domicilio?.despesa_energia,
         },
         {
           label: 'Despesa com Gás',
-          value: citizen.domicilio?.despesa_gas,
+          value: cadUnico?.domicilio?.despesa_gas,
         },
         {
           label: 'Despesa com Transporte',
-          value: citizen.domicilio?.despesa_transporte,
+          value: cadUnico?.domicilio?.despesa_transporte,
         },
       ],
     },
@@ -232,7 +226,7 @@ export function SocialAssistance({ cpf }: { cpf: string }) {
             </CardContent>
           </Card>
         ))}
-        {(isHealthPending || isCadUnicoPending) && (
+        {isCadUnicoPending && (
           <div className="flex items-center gap-2">
             <Spinner />
             <span>Carregando Dados...</span>

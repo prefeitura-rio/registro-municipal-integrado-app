@@ -1,32 +1,88 @@
 export type Person = {
-  deceased: boolean
-  registration_name: string
-  social_name: string | null
-  cpf: string
-  cns: string | null
-  birth_date: string | null
-  gender: string | null
-  race: string | null
-  phone: string | null
-  family_clinic: {
-    cnes: string | null
-    name: string | null
-    phone: string | null
+  cadastros_conflitantes_indicador: boolean | null
+  cns: string[]
+  dados: {
+    nome: string | null
+    nome_social: string | null
+    data_nascimento: string | null
+    genero: string | null
+    raca: string | null
+    obito_indicador: boolean | null
+    obito_data: string | null
+    mae_nome: string | null
+    pai_nome: string | null
+    identidade_validada_indicador: boolean | null
+    cpf_valido_indicador: boolean | null
+  } | null
+  equipe_saude_familia: [
+    {
+      id_ine: string | null
+      nome: string | null
+      telefone: string | null
+      medicos: [
+        {
+          id_profissional_sus: string | null
+          nome: string | null
+        },
+      ]
+      enfermeiros: [
+        {
+          id_profissional_sus: string | null
+          nome: string | null
+        },
+      ]
+      clinica_familia: {
+        id_cnes: string | null
+        nome: string | null
+        telefone: string | null
+      }
+      datahora_ultima_atualizacao: string | null
+      rank: number | null
+    },
+  ]
+  contato: {
+    telefone: [
+      {
+        ddd: string | null
+        valor: string | null
+        sistema: string | null
+        rank: number | null
+      },
+    ]
+    email: [
+      {
+        valor: string | null
+        sistema: string | null
+        rank: number | null
+      },
+    ]
   }
-  family_health_team: {
-    ine_code: string | null
-    name: string | null
-    phone: string | null
+  endereco: [
+    {
+      cep: string | null
+      tipo_logradouro: string | null
+      logradouro: string | null
+      numero: string | null
+      complemento: string | null
+      bairro: string | null
+      cidade: string | null
+      estado: string | null
+      datahora_ultima_atualizacao: string | null
+      sistema: string | null
+      rank: number | null
+    },
+  ]
+  prontuario: [
+    {
+      sistema: string | null
+      id_cnes: string | null
+      id_paciente: string | null
+      rank: number | null
+    },
+  ]
+  metadados: {
+    processed_at: string | null
   }
-  medical_responsible: {
-    name: string
-    registry: string
-  }[]
-  nursing_responsible: {
-    name: string
-    registry: string
-  }[]
-  validated: boolean
 }
 
 export type Profile = {

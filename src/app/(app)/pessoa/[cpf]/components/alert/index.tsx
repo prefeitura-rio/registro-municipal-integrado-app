@@ -42,8 +42,8 @@ export function ResultAlert({ cpf, open, setOpen }: ResultAlertProps) {
         <AlertDialogContent>
           <AlertDialogHeader>
             {profile && header && encounters ? (
-              !header.birth_date ||
-              calculateAge(new Date(header.birth_date)) > 18 ? (
+              !header.dados?.data_nascimento ||
+              calculateAge(new Date(header.dados?.data_nascimento)) > 18 ? (
                 <>
                   <AlertDialogTitle>Dados sigilosos!</AlertDialogTitle>
                   <AlertDialogDescription className="text-justify">

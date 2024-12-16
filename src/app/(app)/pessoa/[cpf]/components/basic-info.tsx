@@ -1,8 +1,10 @@
 'use client'
 
 import { formatDate } from 'date-fns'
+import Link from 'next/link'
 import { Fragment } from 'react'
 
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Spinner } from '@/components/ui/spinner'
 import { useCadUnicoInfo } from '@/hooks/use-query/use-cad-unico-info'
@@ -30,10 +32,11 @@ export function BasicInfo({ cpf }: { cpf: string }) {
   const { data: transport } = usePublicTransportHistory(cpf)
   const { data: cadUnico, isPending: isCadUnicoPending } = useCadUnicoInfo(cpf)
   const citizen = {
-    ...cadUnico,
-    ...health,
-    name: health?.social_name || health?.registration_name || 'N/A',
-    age: health?.birth_date ? calculateAge(health?.birth_date) : 'N/A',
+    cadUnico,
+    health: {
+      ...health,
+      name: health?.dados?.nome_social || health?.dados?.nome || 'N/A',
+    },
   }
 
   const data: Data = [
@@ -42,33 +45,40 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'CPF',
-          value: citizen.cpf,
+          value: cpf,
         },
         {
           label: 'Idade',
-          value: citizen.age,
+          value: health?.dados?.data_nascimento
+            ? calculateAge(health?.dados.data_nascimento)
+            : 'N/A',
         },
         {
           label: 'Telefone',
-          value: citizen.phone,
+          value: citizen.health?.contato?.telefone[0].valor,
         },
         {
           label: 'Óbito',
-          value: citizen.deceased ? 'Sim' : undefined,
+          value: citizen.health?.dados?.obito_indicador ? 'Sim' : undefined,
         },
         {
           label: 'Data de Nascimento',
-          value: citizen.birth_date
-            ? formatDate(citizen.birth_date, 'dd/MM/yyyy')
+          value: citizen.health.dados?.data_nascimento
+            ? formatDate(citizen.health.dados?.data_nascimento, 'dd/MM/yyyy')
             : undefined,
         },
         {
           label: 'Sexo',
-          value: citizen.gender === 'male' ? 'Masculino' : 'Feminino',
+          value:
+            citizen.health.dados?.genero === 'male'
+              ? 'Masculino'
+              : citizen.health.dados?.genero === 'female'
+                ? 'Feminino'
+                : citizen.health.dados?.genero,
         },
         {
           label: 'Raça',
-          value: citizen.race,
+          value: citizen.health.dados?.raca,
         },
       ],
     },
@@ -77,17 +87,10 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'Unidade de Saúde',
-          value: citizen.family_clinic?.name,
+          value:
+            citizen.health?.equipe_saude_familia?.at(0)?.clinica_familia.nome,
         },
       ],
-    },
-    {
-      cardTitle: 'Família',
-      cardContent:
-        citizen?.membros?.map((item) => ({
-          label: item.parentesco_responsavel_familia,
-          value: item.nome,
-        })) || [],
     },
     {
       cardTitle: 'Transporte',
@@ -115,9 +118,11 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       <CardContent className="flex-grow overflow-auto">
         <div className="mb-4 flex items-center space-x-4">
           <div>
-            <h2 className="text-2xl font-bold">{citizen.name}</h2>
+            <h2 className="text-2xl font-bold">
+              {health?.dados?.nome_social || health?.dados?.nome || 'N/A'}
+            </h2>
             <p className="text-gray-500">
-              {citizen.renda?.funcao_principal_trabalho}
+              {citizen.cadUnico?.renda?.funcao_principal_trabalho}
             </p>
           </div>
         </div>
@@ -143,6 +148,22 @@ export function BasicInfo({ cpf }: { cpf: string }) {
                 </CardContent>
               </Card>
             ))}
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>Família</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {citizen.cadUnico?.membros.map((member, index) => (
+                  <Button
+                    key={index}
+                    variant="link"
+                    className="block h-auto p-0"
+                  >
+                    <Link href={`/pessoa/${member.cpf}`}>{member.nome}</Link>
+                  </Button>
+                ))}
+              </CardContent>
+            </Card>
           </div>
         )}
         {(isHealthPending || isCadUnicoPending) && (
