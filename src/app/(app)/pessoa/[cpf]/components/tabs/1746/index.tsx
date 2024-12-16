@@ -12,6 +12,7 @@ import { use1746Reports } from '@/hooks/use-query/use-1746-reports'
 
 import { columns } from './components/columns'
 import { Dashboard } from './components/dashboard'
+import { TableSkeleton } from './components/table-skeleton'
 
 export function Servico1746({ cpf }: { cpf: string }) {
   const { data: reports1746, isPending } = use1746Reports(cpf)
@@ -44,12 +45,7 @@ export function Servico1746({ cpf }: { cpf: string }) {
               data={reports1746}
             />
           )}
-          {isPending && (
-            <div className="flex items-center gap-2">
-              <Spinner />
-              <span>Carregando Tabela...</span>
-            </div>
-          )}
+          {isPending && <TableSkeleton />}
         </CardContent>
       </Card>
     </div>
