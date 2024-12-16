@@ -31,13 +31,6 @@ export function BasicInfo({ cpf }: { cpf: string }) {
   const { data: health, isPending: isHealthPending } = usePerson(cpf)
   const { data: transport } = usePublicTransportHistory(cpf)
   const { data: cadUnico, isPending: isCadUnicoPending } = useCadUnicoInfo(cpf)
-  const citizen = {
-    cadUnico,
-    health: {
-      ...health,
-      name: health?.dados?.nome_social || health?.dados?.nome || 'N/A',
-    },
-  }
 
   const data: Data = [
     {
@@ -54,31 +47,45 @@ export function BasicInfo({ cpf }: { cpf: string }) {
             : 'N/A',
         },
         {
-          label: 'Telefone',
-          value: citizen.health?.contato?.telefone[0].valor,
-        },
-        {
           label: 'Óbito',
-          value: citizen.health?.dados?.obito_indicador ? 'Sim' : undefined,
+          value: health?.dados?.obito_indicador ? 'Sim' : undefined,
         },
         {
           label: 'Data de Nascimento',
-          value: citizen.health.dados?.data_nascimento
-            ? formatDate(citizen.health.dados?.data_nascimento, 'dd/MM/yyyy')
+          value: health?.dados?.data_nascimento
+            ? formatDate(health?.dados?.data_nascimento, 'dd/MM/yyyy')
             : undefined,
         },
         {
           label: 'Sexo',
           value:
-            citizen.health.dados?.genero === 'male'
+            health?.dados?.genero === 'male'
               ? 'Masculino'
-              : citizen.health.dados?.genero === 'female'
+              : health?.dados?.genero === 'female'
                 ? 'Feminino'
-                : citizen.health.dados?.genero,
+                : health?.dados?.genero,
         },
         {
           label: 'Raça',
-          value: citizen.health.dados?.raca,
+          value: health?.dados?.raca,
+        },
+        {
+          label: 'Endereço',
+          value: `${health?.endereco?.at(0)?.tipo_logradouro} ${health?.endereco?.at(0)?.logradouro} ${health?.endereco?.at(0)?.numero || 'S/N'}, ${health?.endereco?.at(0)?.bairro}`,
+        },
+        {
+          label:
+            health?.contato?.telefone && health?.contato?.telefone?.length > 1
+              ? 'Telefones'
+              : 'Telefone',
+          value: health?.contato?.telefone.map((item) => item.valor).join(', '),
+        },
+        {
+          label:
+            health?.contato?.email && health?.contato?.email?.length > 1
+              ? 'E-mails'
+              : 'E-mail',
+          value: health?.contato?.email.map((item) => item.valor).join(', '),
         },
       ],
     },
@@ -87,8 +94,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'Unidade de Saúde',
-          value:
-            citizen.health?.equipe_saude_familia?.at(0)?.clinica_familia.nome,
+          value: health?.equipe_saude_familia?.at(0)?.clinica_familia.nome,
         },
       ],
     },
@@ -97,14 +103,9 @@ export function BasicInfo({ cpf }: { cpf: string }) {
       cardContent: [
         {
           label: 'Gratuidade',
-          value: transport?.find((item) => item.tipo_transacao === 'Gratuidade')
-            ? 'Sim'
-            : 'Não',
-        },
-        {
-          label: 'Tipo de Gratuidade',
-          value: transport?.find((item) => item.tipo_transacao === 'Gratuidade')
-            ?.tipo_gratuidade,
+          value:
+            transport?.find((item) => item.tipo_transacao === 'Gratuidade')
+              ?.tipo_gratuidade || 'Não',
         },
       ],
     },
@@ -122,11 +123,11 @@ export function BasicInfo({ cpf }: { cpf: string }) {
               {health?.dados?.nome_social || health?.dados?.nome || 'N/A'}
             </h2>
             <p className="text-gray-500">
-              {citizen.cadUnico?.renda?.funcao_principal_trabalho}
+              {cadUnico?.renda?.funcao_principal_trabalho}
             </p>
           </div>
         </div>
-        {health && cadUnico && citizen && (
+        {health && cadUnico && (
           <div className="space-y-4">
             {data.map((item, index) => (
               <Card key={index} className="w-full">
@@ -153,7 +154,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
                 <CardTitle>Família</CardTitle>
               </CardHeader>
               <CardContent>
-                {citizen.cadUnico?.membros.map((member, index) => (
+                {cadUnico?.membros.map((member, index) => (
                   <Button
                     key={index}
                     variant="link"
