@@ -1,34 +1,117 @@
 'use client'
 
 import { useMutation } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useCookies } from 'next-client-cookies'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { BreadcrumbHeader } from '@/components/breadcrumb-header'
 import { Spinner } from '@/components/ui/spinner'
+import { env } from '@/env/client'
 import { getAIAnswer } from '@/http/ai/get-ai-answer'
+import { ACCESS_TOKEN_COOKIE } from '@/lib/api'
 import { cn } from '@/lib/utils'
 
 import { ChatInput } from './components/chat-input'
 
 export default function Page() {
+  const cookies = useCookies()
   const [chatId] = useState(uuidv4())
+  const [isPending, setIsPending] = useState(false)
+  const [socket, setSocket] = useState<WebSocket | null>(null)
+
   const [query, setQuery] = useState('')
   const [messages, setMessages] = useState<
     { message: string; author: 'IA' | 'user' }[]
   >([])
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationKey: ['ai', 'query'],
     mutationFn: getAIAnswer,
   })
 
-  async function handleSendQuery(query: string) {
+  function handleSendQuery() {
+    setIsPending(true)
+    const newMessage = query
     setQuery('')
-    setMessages((prev) => [...prev, { message: query, author: 'user' }])
-    const response = await mutateAsync({ query, chatId })
-    setMessages((prev) => [...prev, { message: response, author: 'IA' }])
+    setMessages((prev) => [...prev, { message: newMessage, author: 'user' }])
+    mutateAsync({ chatId, query: newMessage })
   }
+
+  useEffect(() => {
+    async function initWS() {
+      const ws = new WebSocket(
+        `${env.NEXT_PUBLIC_API_URL.replace('https', 'wss')}/ai/ws/${chatId}`,
+      )
+
+      ws.onopen = () => {
+        console.log('Connected to WebSocket server!')
+
+        const token = cookies.get(ACCESS_TOKEN_COOKIE)
+        ws.send(JSON.stringify({ Authorization: `Bearer ${token}` }))
+      }
+
+      ws.onmessage = (event) => {
+        // const data = JSON.parse(event.data)
+        if (event.data instanceof Blob) {
+          console.log('Received Blob:')
+
+          const reader = new FileReader()
+
+          reader.onloadend = () => {
+            try {
+              const jsonString = reader.result as string
+              const data = JSON.parse(jsonString)
+              console.log({ data })
+
+              if (data.status === 'failure') {
+                console.error('Error from AI:', data.error_message)
+                return
+              }
+
+              if (data.status === 'success') {
+                console.log('Success from AI:', data.response)
+                const newMessage = data.response
+
+                setMessages((prev) => [
+                  ...prev,
+                  { message: newMessage, author: 'IA' },
+                ])
+              }
+            } catch (error) {
+              console.error('Error parsing Blob data:', error)
+            }
+          }
+
+          reader.readAsText(event.data)
+        }
+
+        setIsPending(false)
+      }
+
+      ws.onclose = () => {
+        console.log('Disconnected from WebSocket server!')
+      }
+
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error)
+        ws.close()
+      }
+
+      // Salva a instância do WebSocket no estado
+      setSocket(ws)
+
+      // Cleanup ao desmontar o componente
+      return () => {
+        console.log('Cleaning up WebSocket connection...')
+        ws.close()
+      }
+    }
+
+    if (messages.length > 0 && !socket) {
+      initWS()
+    }
+  }, [messages])
 
   return (
     <div className="page">
@@ -76,8 +159,8 @@ export default function Page() {
             ))}
             {isPending && (
               <div className="mb-3 flex items-center gap-2">
-                <Spinner />{' '}
-                <span className="text-sm text-muted-foreground">
+                <Spinner />
+                <span className="block text-sm text-muted-foreground">
                   IA da Prefeitura está digitando...
                 </span>
               </div>

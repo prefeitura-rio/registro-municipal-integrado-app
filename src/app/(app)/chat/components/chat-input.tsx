@@ -18,6 +18,7 @@ export function ChatInput({
   return (
     <div className="relative z-10 -mt-2 w-full max-w-screen-lg rounded-lg">
       <Textarea
+        disabled={disabled}
         value={query}
         onChange={(e) => setQuery(e.currentTarget.value)}
         className="w-full resize-none bg-background"
