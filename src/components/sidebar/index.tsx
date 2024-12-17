@@ -13,6 +13,7 @@ import {
 import { NavHeader } from './components/nav-header'
 import { NavMain } from './components/nav-main'
 import { NavUser } from './components/nav-user'
+import { OtherFeatures } from './components/other-features'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -22,6 +23,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain />
+        <OtherFeatures />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
