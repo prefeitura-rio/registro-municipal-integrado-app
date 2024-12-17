@@ -16,7 +16,7 @@ export function ChatInput({
   disabled = false,
 }: ChatInputProps) {
   return (
-    <div className="relative z-10 -mt-2 w-full max-w-screen-lg rounded-lg">
+    <div className="relative z-10 mx-auto -mt-2 w-full max-w-screen-lg rounded-lg">
       <Textarea
         disabled={disabled}
         value={query}

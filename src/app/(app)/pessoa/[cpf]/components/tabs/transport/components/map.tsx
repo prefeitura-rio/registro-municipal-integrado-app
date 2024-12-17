@@ -70,7 +70,7 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
         <Image
           src={mapboxImageUrl}
           alt="Map showing various public transport locations"
-          className="rounded-lg shadow-md"
+          className="shadow-md"
           width={mapWidth}
           height={mapHeight}
           priority

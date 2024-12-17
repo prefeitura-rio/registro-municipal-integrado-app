@@ -1,11 +1,12 @@
 'use client'
 
 import { formatDate } from 'date-fns'
+import { Link2 } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
+import { TypographyH6 } from '@/components/typography/h6'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Spinner } from '@/components/ui/spinner'
 import { useCadUnicoInfo } from '@/hooks/use-query/use-cad-unico-info'
 import { usePerson } from '@/hooks/use-query/use-person'
@@ -122,11 +123,8 @@ export function BasicInfo({ cpf }: { cpf: string }) {
   ]
 
   return (
-    <Card className="flex flex-col lg:w-1/3">
-      <CardHeader className="flex-shrink-0">
-        <CardTitle>Informações Básicas</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-grow overflow-auto">
+    <div className="flex flex-col rounded-none border-r lg:w-1/3">
+      <div className="flex-grow overflow-auto p-6">
         <div className="mb-4 flex items-center space-x-4">
           <div>
             <h2 className="text-2xl font-bold">
@@ -142,11 +140,9 @@ export function BasicInfo({ cpf }: { cpf: string }) {
             {data.map(
               (item, index) =>
                 item.visible && (
-                  <Card key={index} className="w-full">
-                    <CardHeader>
-                      <CardTitle>{item.cardTitle}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
+                  <div key={index} className="w-full">
+                    <TypographyH6>{item.cardTitle}</TypographyH6>
+                    <div className="ml-4">
                       {item.cardContent.map((item, index) => (
                         <Fragment key={index}>
                           {'reactNode' in item
@@ -158,27 +154,26 @@ export function BasicInfo({ cpf }: { cpf: string }) {
                               )}
                         </Fragment>
                       ))}
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 ),
             )}
             {cadUnico.membros && cadUnico.membros.length > 0 && (
-              <Card className="w-full">
-                <CardHeader>
-                  <CardTitle>Família</CardTitle>
-                </CardHeader>
-                <CardContent>
+              <div className="w-full">
+                <TypographyH6>Família</TypographyH6>
+                <div className="ml-4 space-y-0.5">
                   {cadUnico.membros.map((member, index) => (
                     <Button
                       key={index}
                       variant="link"
-                      className="block h-auto p-0"
+                      className="flex h-auto items-center gap-2 p-0"
                     >
+                      <Link2 />
                       <Link href={`/pessoa/${member.cpf}`}>{member.nome}</Link>
                     </Button>
                   ))}
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )}
           </div>
         )}
@@ -188,7 +183,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
             <span>Carregando Dados...</span>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

@@ -2,13 +2,6 @@
 
 import { useState } from 'react'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { Servico1746 } from './1746'
@@ -21,20 +14,14 @@ export function TabsCard({ cpf }: { cpf: string }) {
   const [activeTab, setActiveTab] = useState('transport')
 
   return (
-    <Card className="flex h-full min-h-[600px] grow flex-col lg:min-h-0 lg:w-2/3">
-      <CardHeader className="flex-shrink-0">
-        <CardTitle>Dados do Cidadão</CardTitle>
-        <CardDescription>
-          Explore diferentes aspectos da vida do cidadão
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex h-0 flex-grow flex-col items-stretch">
+    <div className="flex h-full min-h-[600px] grow flex-col lg:min-h-0 lg:w-2/3">
+      <div className="flex h-0 flex-grow flex-col items-stretch">
         <Tabs
           value={activeTab}
           onValueChange={setActiveTab}
           className="flex h-0 flex-grow flex-col"
         >
-          <TabsList className="grid h-auto w-full flex-shrink-0 grid-cols-3 xl:grid-cols-5">
+          <TabsList className="grid h-auto w-full flex-shrink-0 grid-cols-3 rounded-none xl:grid-cols-5 [&_*]:rounded-none">
             <TabsTrigger value="transport">Transporte</TabsTrigger>
             <TabsTrigger value="health">Saúde</TabsTrigger>
             <TabsTrigger value="social assistence">
@@ -62,7 +49,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             <Education />
           </TabsContent>
         </Tabs>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

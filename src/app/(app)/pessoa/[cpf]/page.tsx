@@ -30,7 +30,7 @@ export default function PersonDetails() {
 
   if (profile)
     return (
-      <div className="page">
+      <div className="page p-0">
         <ResultAlert cpf={cpf} open={openAlert} setOpen={setOpenAlert} />
         {!openAlert && (
           <>
@@ -41,11 +41,11 @@ export default function PersonDetails() {
                 { label: cpf },
               ]}
             />
-            <div className="flex flex-grow flex-col overflow-auto p-4">
-              <h1 className="mb-6 flex-shrink-0 text-3xl font-bold">
+            <div className="flex flex-grow flex-col overflow-auto">
+              {/* <h1 className="mb-6 flex-shrink-0 text-3xl font-bold">
                 Perfil do Cidadão
-              </h1>
-              <div className="flex h-0 flex-grow flex-col items-stretch gap-6 lg:flex-row">
+              </h1> */}
+              <div className="flex h-0 flex-grow flex-col items-stretch lg:flex-row">
                 {/* Basic Info Card */}
                 <BasicInfo cpf={cpf} />
 

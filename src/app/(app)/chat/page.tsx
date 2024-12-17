@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { BreadcrumbHeader } from '@/components/breadcrumb-header'
+import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { env } from '@/env/client'
 import { getAIAnswer } from '@/http/ai/get-ai-answer'
@@ -30,9 +31,8 @@ export default function Page() {
     mutationFn: getAIAnswer,
   })
 
-  function handleSendQuery() {
+  function handleSendQuery(newMessage: string) {
     setIsPending(true)
-    const newMessage = query
     setQuery('')
     setMessages((prev) => [...prev, { message: newMessage, author: 'user' }])
     mutateAsync({ chatId, query: newMessage })
@@ -66,6 +66,13 @@ export default function Page() {
 
               if (data.status === 'failure') {
                 console.error('Error from AI:', data.error_message)
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    message: `Erro ao processar a requisição. Tente novamente. Erro: ${data.error_message}`,
+                    author: 'IA',
+                  },
+                ])
                 return
               }
 
@@ -91,6 +98,15 @@ export default function Page() {
 
       ws.onclose = () => {
         console.log('Disconnected from WebSocket server!')
+        if (isPending) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              message: 'Erro ao processar a requisição. Tente novamente.',
+              author: 'IA',
+            },
+          ])
+        }
       }
 
       ws.onerror = (error) => {
@@ -121,19 +137,52 @@ export default function Page() {
 
       {/* New Chat */}
       {messages.length === 0 ? (
-        <div className="flex flex-col p-4">
+        <div className="flex flex-grow flex-col items-center justify-center gap-2 p-4">
           <h1 className="mb-6 flex-shrink-0 text-center text-3xl font-bold">
             Como posso ajudar?
           </h1>
-          <div className="flex justify-center">
-            <div className="relative w-[80%]">
-              <ChatInput
-                query={query}
-                handleSendQuery={handleSendQuery}
-                setQuery={setQuery}
-                disabled={isPending}
-              />
-            </div>
+          <div className="w-full">
+            <ChatInput
+              query={query}
+              handleSendQuery={() => handleSendQuery(query)}
+              setQuery={setQuery}
+              disabled={isPending}
+            />
+          </div>
+          <div className="flex flex-col gap-2 text-sm text-secondary-foreground">
+            <Button
+              className=""
+              variant="outline"
+              onClick={() =>
+                handleSendQuery(
+                  'Qual o tipo de reclamação mais comum em Irajá?',
+                )
+              }
+            >
+              Qual o tipo de reclamação mais comum em Irajá?
+            </Button>
+            <Button
+              className=""
+              variant="outline"
+              onClick={() =>
+                handleSendQuery(
+                  'Qual é o medicamento de uso contínuo mais comum?',
+                )
+              }
+            >
+              Qual é o medicamento de uso contínuo mais comum?
+            </Button>
+            <Button
+              className=""
+              variant="outline"
+              onClick={() =>
+                handleSendQuery(
+                  'Qual é a alergia mais comum na Zona Norte da cidade?',
+                )
+              }
+            >
+              Qual é a alergia mais comum na Zona Norte da cidade?
+            </Button>
           </div>
         </div>
       ) : (
@@ -161,14 +210,14 @@ export default function Page() {
               <div className="mb-3 flex items-center gap-2">
                 <Spinner />
                 <span className="block text-sm text-muted-foreground">
-                  IA da Prefeitura está digitando...
+                  IA da Prefeitura está pensando...
                 </span>
               </div>
             )}
           </div>
           <ChatInput
             query={query}
-            handleSendQuery={handleSendQuery}
+            handleSendQuery={() => handleSendQuery(query)}
             setQuery={setQuery}
             disabled={isPending}
           />
