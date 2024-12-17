@@ -162,13 +162,13 @@ export function BasicInfo({ cpf }: { cpf: string }) {
                   </Card>
                 ),
             )}
-            {cadUnico.membros.length > 0 && (
+            {cadUnico.membros && cadUnico.membros.length > 0 && (
               <Card className="w-full">
                 <CardHeader>
                   <CardTitle>Família</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {cadUnico?.membros.map((member, index) => (
+                  {cadUnico.membros.map((member, index) => (
                     <Button
                       key={index}
                       variant="link"

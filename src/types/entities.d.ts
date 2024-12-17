@@ -200,37 +200,39 @@ export type CadUnicoInfo = {
     nome_pai: string | null
     condicao_rua: boolean | null
     trabalho_infantil: string | null
-    numeros_membros_familia: number
-  }
+    numeros_membros_familia: number | null
+  } | null
   deficiencia: {
-    tem_deficiencia: boolean
-    tipo_deficiencia: boolean
-  }
+    tem_deficiencia: boolean | null
+    tipo_deficiencia: boolean | null
+  } | null
   domicilio: {
-    especie_domicilio: string
-    iluminacao: string
-    comodos: number
-    forma_abastecimento_agua: string
-    possui_agua_encanada: string
-    escoamento_sanitario: string
-    local: string
-    despesa_agua_esgoto: number
-    despesa_alimentacao: number
-    despesa_aluguel: number
-    despesa_energia: number
-    despesa_gas: number
-    despesa_transporte: number
-  }
+    especie_domicilio: string | null
+    iluminacao: string | null
+    comodos: number | null
+    forma_abastecimento_agua: string | null
+    possui_agua_encanada: string | null
+    escoamento_sanitario: string | null
+    local: string | null
+    despesa_agua_esgoto: number | null
+    despesa_alimentacao: number | null
+    despesa_aluguel: number | null
+    despesa_energia: number | null
+    despesa_gas: number | null
+    despesa_transporte: number | null
+  } | null
   escolaridade: {
-    sabe_ler_escrever: string
-    curso_mais_elevado_frequentou: string
-  }
-  membros: {
-    cpf: string
-    id_membro_familia: string
-    nome: string
-    parentesco_responsavel_familia: string
-  }[]
+    sabe_ler_escrever: string | null
+    curso_mais_elevado_frequentou: string | null
+  } | null
+  membros:
+    | {
+        cpf: string
+        id_membro_familia: string
+        nome: string
+        parentesco_responsavel_familia: string
+      }[]
+    | null
   renda: {
     renda_media_familia: number | null
     renda_outras_rendas: number | null
@@ -242,7 +244,7 @@ export type CadUnicoInfo = {
     renda_seguro_desemprego: number | null
     nao_recebe_remuneracao: number | null
     funcao_principal_trabalho: number | null
-  }
+  } | null
 }
 
 export type PublicTransportEvent = {
