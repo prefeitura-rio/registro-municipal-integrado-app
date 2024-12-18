@@ -40,9 +40,12 @@ export default function Page() {
 
   useEffect(() => {
     async function initWS() {
-      const ws = new WebSocket(
-        `${env.NEXT_PUBLIC_API_URL.replace('https', 'wss')}/ai/ws/${chatId}`,
-      )
+      const httpBaseUrl = env.NEXT_PUBLIC_API_URL.endsWith('/')
+        ? env.NEXT_PUBLIC_API_URL.slice(0, -1)
+        : env.NEXT_PUBLIC_API_URL
+      const wsBaseUrl = httpBaseUrl.replace('https', 'wss')
+      console.log(`${wsBaseUrl}/ai/ws/${chatId}`)
+      const ws = new WebSocket(`${wsBaseUrl}/ai/ws/${chatId}`)
 
       ws.onopen = () => {
         console.log('Connected to WebSocket server!')
