@@ -15,6 +15,9 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   const mapStyle = 'mapbox/streets-v12'
   const mapWidth = 1000
   const mapHeight = 330
+  const morningColor = 'facc15'
+  const afternoonColor = 'ef4444'
+  const nightColor = '0284c7'
 
   const { data, isPending } = usePublicTransportHistory(cpf)
 
@@ -22,7 +25,12 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
     if (point.longitude === 0 && point.latitude === 0) return ''
     console.log({ point })
     const name = 'pin-s'
-    const color = '000000'
+    const color =
+      new Date(point.datetime_transacao).getHours() < 12
+        ? morningColor
+        : new Date(point.datetime_transacao).getHours() < 18
+          ? afternoonColor
+          : nightColor
     const lon = point.longitude.toString()
     const lat = point.latitude.toString()
 
@@ -67,14 +75,30 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
   return (
     <div className="flex w-full justify-center">
       {mapboxImageUrl ? (
-        <Image
-          src={mapboxImageUrl}
-          alt="Map showing various public transport locations"
-          className="shadow-md"
-          width={mapWidth}
-          height={mapHeight}
-          priority
-        />
+        <div className="relative">
+          <Image
+            src={mapboxImageUrl}
+            alt="Map showing various public transport locations"
+            className="shadow-md"
+            width={mapWidth}
+            height={mapHeight}
+            priority
+          />
+          <div className="absolute bottom-0 left-0 m-4 rounded bg-white bg-opacity-75 p-2 shadow-md">
+            <div className="mb-1 flex items-center">
+              <span className="mr-2 inline-block h-3 w-3 bg-yellow-400"></span>
+              <span className="text-sm text-gray-800">Manhã</span>
+            </div>
+            <div className="mb-1 flex items-center">
+              <span className="mr-2 inline-block h-3 w-3 bg-red-500"></span>
+              <span className="text-sm text-gray-800">Tarde</span>
+            </div>
+            <div className="flex items-center">
+              <span className="mr-2 inline-block h-3 w-3 bg-sky-600"></span>
+              <span className="text-sm text-gray-800">Noite</span>
+            </div>
+          </div>
+        </div>
       ) : isPending ? (
         <div
           className="flex items-center justify-center bg-secondary"

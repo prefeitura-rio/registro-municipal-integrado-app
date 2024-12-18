@@ -1,6 +1,5 @@
 import { TypographyH3 } from '@/components/typography/h3'
 import {
-  Card,
   CardContent,
   CardDescription,
   CardHeader,
@@ -29,7 +28,7 @@ export function Servico1746({ cpf }: { cpf: string }) {
           <span>Carregando dashboard...</span>
         </div>
       )}
-      <Card className="mt-8">
+      <div className="mt-8">
         <CardHeader>
           <CardTitle>Histórico de Interações</CardTitle>
           <CardDescription>
@@ -47,7 +46,7 @@ export function Servico1746({ cpf }: { cpf: string }) {
           )}
           {isPending && <TableSkeleton />}
         </CardContent>
-      </Card>
+      </div>
     </div>
   )
 }

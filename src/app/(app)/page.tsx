@@ -35,16 +35,16 @@ const secretarias = [
       { name: 'Medicamentos Retirados', status: 'Pendente' },
       {
         name: 'Alvará e Multas da Vigilância Sanitária',
-        status: 'Não Iniciado',
+        status: 'Não Disponível',
       },
     ],
   },
   {
     name: 'Educação',
     dataCategories: [
-      { name: 'Matrículas Escolares', status: 'Não Iniciado' },
-      { name: 'Histórico Escolar', status: 'Não Iniciado' },
-      { name: 'Frequência Escolar', status: 'Não Iniciado' },
+      { name: 'Matrículas Escolares', status: 'Não Disponível' },
+      { name: 'Histórico Escolar', status: 'Não Disponível' },
+      { name: 'Frequência Escolar', status: 'Não Disponível' },
     ],
   },
   {
@@ -58,7 +58,7 @@ const secretarias = [
     name: 'Assistência Social',
     dataCategories: [
       { name: 'Cadastro Único', status: 'Integrado' },
-      { name: 'Programa Seguir em Frente', status: 'Não Iniciado' },
+      { name: 'Programa Seguir em Frente', status: 'Não Disponível' },
     ],
   },
   {
@@ -71,17 +71,17 @@ const secretarias = [
     name: 'Fazenda',
     dataCategories: [
       { name: 'Ergon', status: 'Pendente' },
-      { name: 'ISS', status: 'Não Iniciado' },
-      { name: 'Nota Carioca', status: 'Não Iniciado' },
-      { name: 'IPTU', status: 'Não Iniciado' },
-      { name: 'ITBI', status: 'Não Iniciado' },
+      { name: 'ISS', status: 'Não Disponível' },
+      { name: 'Nota Carioca', status: 'Não Disponível' },
+      { name: 'IPTU', status: 'Não Disponível' },
+      { name: 'ITBI', status: 'Não Disponível' },
     ],
   },
   {
     name: 'Segurança',
     dataCategories: [
-      { name: 'Histórico Criminal', status: 'Não Iniciado' },
-      { name: 'Maria da Penha', status: 'Não Iniciado' },
+      { name: 'Histórico Criminal', status: 'Não Disponível' },
+      { name: 'Maria da Penha', status: 'Não Disponível' },
     ],
   },
 ]
@@ -139,7 +139,7 @@ export default function Page() {
                       {category.status === 'Pendente' && (
                         <AlertCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status === 'Não Iniciado' && (
+                      {category.status === 'Não Disponível' && (
                         <XCircle className="mr-1 h-4 w-4" />
                       )}
                       {category.status}
