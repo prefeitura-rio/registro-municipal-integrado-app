@@ -3,10 +3,10 @@
 import { useMutation } from '@tanstack/react-query'
 import { useCookies } from 'next-client-cookies'
 import { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import { v4 as uuidv4 } from 'uuid'
 
 import { BreadcrumbHeader } from '@/components/breadcrumb-header'
+import { Markdown } from '@/components/markdon'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { env } from '@/env/client'
@@ -45,7 +45,6 @@ export default function Page() {
         ? env.NEXT_PUBLIC_API_URL.slice(0, -1)
         : env.NEXT_PUBLIC_API_URL
       const wsBaseUrl = httpBaseUrl.replace('https', 'wss')
-      console.log(`${wsBaseUrl}/ai/ws/${chatId}`)
       const ws = new WebSocket(`${wsBaseUrl}/ai/ws/${chatId}`)
 
       ws.onopen = () => {
@@ -56,7 +55,6 @@ export default function Page() {
       }
 
       ws.onmessage = (event) => {
-        // const data = JSON.parse(event.data)
         if (event.data instanceof Blob) {
           console.log('Received Blob:')
 
@@ -191,7 +189,7 @@ export default function Page() {
         </div>
       ) : (
         <div className="flex flex-grow flex-col items-center justify-between overflow-y-auto">
-          <div className="-mr-4 flex max-w-screen-lg flex-grow flex-col gap-3 overflow-y-auto pb-6 pr-4">
+          <div className="-mr-4 flex w-full max-w-screen-lg flex-grow flex-col gap-3 overflow-y-auto pb-6 pr-4">
             {messages.map((item, index) => (
               <div
                 key={index}
@@ -200,14 +198,14 @@ export default function Page() {
                   item.author === 'IA' ? 'justify-start' : 'justify-end',
                 )}
               >
-                <ReactMarkdown
+                <div
                   className={cn(
-                    'max-w-[80%] rounded-lg border-border bg-card px-6 py-4',
-                    item.author === 'IA' ? 'bg-primary/20' : 'bg-primary/10',
+                    'prose prose-sm max-w-[80%] rounded-lg border-2 border-border p-6 shadow-sm',
+                    item.author === 'IA' ? 'bg-primary/5' : 'bg-primary/10',
                   )}
                 >
-                  {item.message}
-                </ReactMarkdown>
+                  <Markdown content={item.message} />
+                </div>
               </div>
             ))}
             {isPending && (

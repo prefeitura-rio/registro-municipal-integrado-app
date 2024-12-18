@@ -27,7 +27,6 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
 
   useEffect(() => {
     getEnv().then((env) => {
-      console.log({ env })
       setMapboxAccessTken(env.MAPBOX_ACCESS_TOKEN)
     })
   }, [])

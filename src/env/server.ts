@@ -8,7 +8,6 @@ const clientEnvSchema = z.object({
 })
 
 export async function getEnv() {
-  console.log({ _env: process.env })
   const _env = clientEnvSchema.safeParse({
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
