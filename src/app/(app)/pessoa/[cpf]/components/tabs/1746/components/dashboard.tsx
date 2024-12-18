@@ -1,6 +1,13 @@
 'use client'
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import {
+  Bar,
+  BarChart,
+  LabelList,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Interaction1746 } from '@/types/entities'
@@ -58,20 +65,28 @@ export function Dashboard({ data }: DashboardData) {
           <div className="text-2xl font-bold">{onGoingIncidents}</div>
         </CardContent>
       </Card>
-      <Card className="col-span-2">
+      <div className="col-span-2">
         <CardHeader>
           <CardTitle>Top 5 Reclamações</CardTitle>
         </CardHeader>
-        <CardContent className="pl-2">
+        <CardContent>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={top5Subtypes} layout="vertical">
-              <XAxis type="number" allowDecimals={false} />
-              <YAxis dataKey="subtipo" type="category" width={150} />
-              <Bar dataKey="count" fill="#8884d8" />
+              <XAxis type="number" allowDecimals={false} hide />
+              <YAxis dataKey="subtipo" type="category" width={250} />
+              <Bar dataKey="count" fill="#8884d8">
+                <LabelList
+                  dataKey="count"
+                  position="insideRight"
+                  offset={8}
+                  className="fill-accent-foreground"
+                  fontSize={18}
+                />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
-      </Card>
+      </div>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import { usePerson } from '@/hooks/use-query/use-person'
 import { usePublicTransportFrequentRoutes } from '@/hooks/use-query/use-public-transport-frequent-route'
 import { usePublicTransportHistory } from '@/hooks/use-query/use-public-transport-history'
 import { calculateAge } from '@/utils/calculate-age'
+import { capitalize } from '@/utils/string-formatters'
 
 type cardContentItem =
   | {
@@ -76,7 +77,7 @@ export function BasicInfo({ cpf }: { cpf: string }) {
         },
         {
           label: 'Endereço',
-          value: `${health?.endereco?.at(0)?.tipo_logradouro} ${health?.endereco?.at(0)?.logradouro} ${health?.endereco?.at(0)?.numero || 'S/N'}, ${health?.endereco?.at(0)?.bairro}`,
+          value: `${capitalize(health?.endereco?.at(0)?.tipo_logradouro)} ${health?.endereco?.at(0)?.logradouro} ${health?.endereco?.at(0)?.numero || 'S/N'}, ${health?.endereco?.at(0)?.bairro}`,
         },
         {
           label:

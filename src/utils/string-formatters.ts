@@ -21,7 +21,8 @@ export function formatCPF(value: string) {
   return formattedValue
 }
 
-export function formatPhone(value: string) {
+export function formatPhone(value: string | undefined | null) {
+  if (!value) return value
   // Remove any non-numeric characters
   const numericValue = value.replace(/\D/g, '')
 
@@ -48,4 +49,9 @@ export function formatPhone(value: string) {
   const last4Digits = numericValue.slice(-4)
 
   return ddd + celDigit + middleDigits + '-' + last4Digits
+}
+
+export function capitalize(value: string | undefined | null) {
+  if (!value) return value
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 }

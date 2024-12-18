@@ -25,6 +25,7 @@ export function TransportTable({ cpf }: { cpf: string }) {
               <TableHead>Data</TableHead>
               <TableHead>Hora</TableHead>
               <TableHead>Modo</TableHead>
+              <TableHead>Linha</TableHead>
               <TableHead>Serviço</TableHead>
               <TableHead>Valor</TableHead>
             </TableRow>
@@ -39,6 +40,7 @@ export function TransportTable({ cpf }: { cpf: string }) {
                   {formatDate(event.datetime_transacao, 'HH:mm:ss')}
                 </TableCell>
                 <TableCell>{event.modo}</TableCell>
+                <TableCell>{event.servico_jae}</TableCell>
                 <TableCell>{event.descricao_servico_jae}</TableCell>
                 <TableCell className="text-nowrap">
                   R$ {event.valor_transacao.toFixed(2)}
