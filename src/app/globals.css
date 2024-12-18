@@ -136,7 +136,7 @@ body {
 
 @layer components {
   .page {
-    @apply flex h-dvh flex-col overflow-hidden p-6 w-full;
+    @apply flex h-dvh flex-col overflow-hidden w-full;
   }
 
   .header {

@@ -3,6 +3,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useCookies } from 'next-client-cookies'
 import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { v4 as uuidv4 } from 'uuid'
 
 import { BreadcrumbHeader } from '@/components/breadcrumb-header'
@@ -199,14 +200,14 @@ export default function Page() {
                   item.author === 'IA' ? 'justify-start' : 'justify-end',
                 )}
               >
-                <p
+                <ReactMarkdown
                   className={cn(
                     'max-w-[80%] rounded-lg border-border bg-card px-6 py-4',
                     item.author === 'IA' ? 'bg-primary/20' : 'bg-primary/10',
                   )}
                 >
                   {item.message}
-                </p>
+                </ReactMarkdown>
               </div>
             ))}
             {isPending && (

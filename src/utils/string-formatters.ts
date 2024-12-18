@@ -55,3 +55,29 @@ export function capitalize(value: string | undefined | null) {
   if (!value) return value
   return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 }
+
+export function formatCNPJ(value: string) {
+  // Remove any non-numeric characters
+  const numericValue = value.replace(/\D/g, '')
+
+  // Format the string with dots, slash, and dash
+  let formattedValue = numericValue
+
+  if (numericValue.length > 2) {
+    formattedValue = numericValue.slice(0, 2) + '.' + numericValue.slice(2)
+  }
+  if (numericValue.length > 5) {
+    formattedValue = formattedValue.slice(0, 6) + '.' + numericValue.slice(5)
+  }
+  if (numericValue.length > 8) {
+    formattedValue = formattedValue.slice(0, 10) + '/' + numericValue.slice(8)
+  }
+  if (numericValue.length > 12) {
+    formattedValue = formattedValue.slice(0, 15) + '-' + numericValue.slice(12)
+  }
+  if (numericValue.length > 14) {
+    formattedValue = formattedValue.slice(0, 18)
+  }
+
+  return formattedValue
+}

@@ -1,17 +1,21 @@
 'use client'
 
 import Image from 'next/image'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Spinner } from '@/components/ui/spinner'
+import { getEnv } from '@/env/server'
 import { usePublicTransportHistory } from '@/hooks/use-query/use-public-transport-history'
 import type { PublicTransportEvent } from '@/types/entities'
 
-const MAPBOX_ACCESS_TOKEN =
-  'pk.eyJ1IjoiZXNjcml0b3Jpb2RlZGFkb3MiLCJhIjoiY2t3bWdmcHpjMmJ2cTJucWJ4MGQ1Mm1kbiJ9.4hHJX-1pSevYoBbja7Pq4w'
+// const MAPBOX_ACCESS_TOKEN =
+// 'pk.eyJ1IjoiZXNjcml0b3Jpb2RlZGFkb3MiLCJhIjoiY2t3bWdmcHpjMmJ2cTJucWJ4MGQ1Mm1kbiJ9.4hHJX-1pSevYoBbja7Pq4w'
 
 export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
-  const accessToken = MAPBOX_ACCESS_TOKEN
+  const [mapboxAccessToken, setMapboxAccessTken] = useState<string | undefined>(
+    undefined,
+  )
+  // const accessToken = MAPBOX_ACCESS_TOKEN
   const mapStyle = 'mapbox/streets-v12'
   const mapWidth = 1000
   const mapHeight = 330
@@ -21,6 +25,12 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
 
   const { data, isPending } = usePublicTransportHistory(cpf)
 
+  useEffect(() => {
+    getEnv().then((env) => {
+      console.log({ env })
+      setMapboxAccessTken(env.MAPBOX_ACCESS_TOKEN)
+    })
+  }, [])
   function createMarkerPart(point: PublicTransportEvent) {
     if (point.longitude === 0 && point.latitude === 0) return ''
     console.log({ point })
@@ -67,7 +77,7 @@ export function DynamicMapboxStaticMap({ cpf }: { cpf: string }) {
 
     const viewport = data.length > 1 ? 'auto' : createViewport(data[0])
 
-    return `https://api.mapbox.com/styles/v1/${mapStyle}/static/${markers}/${viewport}/${mapWidth}x${mapHeight}?${data.length > 1 ? 'padding=50&' : ''}access_token=${accessToken}`
+    return `https://api.mapbox.com/styles/v1/${mapStyle}/static/${markers}/${viewport}/${mapWidth}x${mapHeight}?${data.length > 1 ? 'padding=50&' : ''}access_token=${mapboxAccessToken}`
   }, [data])
 
   console.log({ mapboxImageUrl })

@@ -290,3 +290,63 @@ export type PublicTransportFrequentRoute = [
     quantidade: number
   },
 ]
+
+export type Company = {
+  data: string | null
+  cnpj: string | null
+  cnpj_basico: string | null
+  cnpj_ordem: string | null
+  cnpj_dv: string | null
+  identificador_matriz_filial: string | null
+  nome_fantasia: string | null
+  situacao_cadastral: string | null
+  data_situacao_cadastral: string | null
+  motivo_situacao_cadastral: string | null
+  nome_cidade_exterior: string | null
+  pais: string | null
+  data_inicio_atividade: string | null
+  tipo_logradouro: string | null
+  logradouro: string | null
+  numero: string | null
+  complemento: string | null
+  bairro: string | null
+  cep: string | null
+  ddd_1: string | null
+  telefone_1: string | null
+  ddd_2: string | null
+  telefone_2: string | null
+  ddd_fax: string | null
+  fax: string | null
+  email: string | null
+  situacao_especial: string | null
+  data_situacao_especial: string | null
+  cnae:
+    | [
+        {
+          cnae: string | null
+          descricao_subclasse: string | null
+          descricao_classe: string | null
+          descricao_grupo: string | null
+          descricao_divisao: string | null
+          descricao_secao: string | null
+        },
+      ]
+    | null
+  socios:
+    | [
+        {
+          tipo: string | null
+          nome: string | null
+          documento: string | null
+          qualificacao: string | null
+          data_entrada_sociedade: string | null
+          pais: string | null
+          cpf_representante_legal: string | null
+          nome_representante_legal: string | null
+          qualificacao_representante_legal: string | null
+          faixa_etaria: string | null
+        },
+      ]
+    | null
+  cnpj_particao: number | null
+}

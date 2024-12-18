@@ -35,16 +35,16 @@ const secretarias = [
       { name: 'Medicamentos Retirados', status: 'Pendente' },
       {
         name: 'Alvará e Multas da Vigilância Sanitária',
-        status: 'Não Disponível',
+        status: 'Indisponível',
       },
     ],
   },
   {
     name: 'Educação',
     dataCategories: [
-      { name: 'Matrículas Escolares', status: 'Não Disponível' },
-      { name: 'Histórico Escolar', status: 'Não Disponível' },
-      { name: 'Frequência Escolar', status: 'Não Disponível' },
+      { name: 'Matrículas Escolares', status: 'Indisponível' },
+      { name: 'Histórico Escolar', status: 'Indisponível' },
+      { name: 'Frequência Escolar', status: 'Indisponível' },
     ],
   },
   {
@@ -58,7 +58,7 @@ const secretarias = [
     name: 'Assistência Social',
     dataCategories: [
       { name: 'Cadastro Único', status: 'Integrado' },
-      { name: 'Programa Seguir em Frente', status: 'Não Disponível' },
+      { name: 'Programa Seguir em Frente', status: 'Indisponível' },
     ],
   },
   {
@@ -71,27 +71,29 @@ const secretarias = [
     name: 'Fazenda',
     dataCategories: [
       { name: 'Ergon', status: 'Pendente' },
-      { name: 'ISS', status: 'Não Disponível' },
-      { name: 'Nota Carioca', status: 'Não Disponível' },
-      { name: 'IPTU', status: 'Não Disponível' },
-      { name: 'ITBI', status: 'Não Disponível' },
+      { name: 'ISS', status: 'Indisponível' },
+      { name: 'Nota Carioca', status: 'Indisponível' },
+      { name: 'IPTU', status: 'Indisponível' },
+      { name: 'ITBI', status: 'Indisponível' },
     ],
   },
   {
     name: 'Segurança',
     dataCategories: [
-      { name: 'Histórico Criminal', status: 'Não Disponível' },
-      { name: 'Maria da Penha', status: 'Não Disponível' },
+      { name: 'Histórico Criminal', status: 'Indisponível' },
+      { name: 'Maria da Penha', status: 'Indisponível' },
     ],
   },
 ]
 
 export default function Page() {
   return (
-    <div className="page overflow-y-auto p-6">
+    <div className="page overflow-y-auto">
       <BreadcrumbHeader items={[{ label: 'Início' }]} />
-      <TypographyH3 className="mb-3">Visão Geral de Integração</TypographyH3>
-      <div className="grid grid-cols-3 gap-6 xl:grid-cols-5">
+      <TypographyH3 className="mb-6 px-4">
+        Visão Geral de Integração
+      </TypographyH3>
+      <div className="grid grid-cols-3 gap-6 px-4 xl:grid-cols-5">
         {cardsData.map((card, index) => (
           <Card key={index} className="flex flex-col justify-between">
             <CardHeader>
@@ -110,7 +112,7 @@ export default function Page() {
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-6 xl:grid-cols-3">
+      <div className="mt-10 grid grid-cols-2 gap-6 px-4 xl:grid-cols-3">
         {secretarias.map((secretaria) => (
           <Card key={secretaria.name}>
             <CardHeader>
@@ -139,10 +141,10 @@ export default function Page() {
                       {category.status === 'Pendente' && (
                         <AlertCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status === 'Não Disponível' && (
+                      {category.status === 'Indisponível' && (
                         <XCircle className="mr-1 h-4 w-4" />
                       )}
-                      {category.status}
+                      <span className="text-nowrap">{category.status}</span>
                     </Badge>
                   </li>
                 ))}
