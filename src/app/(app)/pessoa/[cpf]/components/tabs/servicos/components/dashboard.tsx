@@ -79,7 +79,7 @@ export function Dashboard({ data }: DashboardData) {
                   dataKey="count"
                   position="insideRight"
                   offset={8}
-                  className="fill-accent-foreground"
+                  className="fill-accent"
                   fontSize={18}
                 />
               </Bar>

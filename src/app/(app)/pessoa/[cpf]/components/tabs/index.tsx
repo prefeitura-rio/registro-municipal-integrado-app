@@ -4,9 +4,9 @@ import { useState } from 'react'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { Servico1746 } from './1746'
 import { Education } from './education'
 import { Health } from './health'
+import { Servicos } from './servicos'
 import { SocialAssistance } from './social-assistance'
 import { Transportation } from './transport'
 
@@ -43,7 +43,7 @@ export function TabsCard({ cpf }: { cpf: string }) {
             <SocialAssistance cpf={cpf} />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="1746">
-            <Servico1746 cpf={cpf} />
+            <Servicos cpf={cpf} />
           </TabsContent>
           <TabsContent className="flex-grow overflow-auto" value="education">
             <Education />

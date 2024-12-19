@@ -117,7 +117,10 @@ export function BasicInfo({ cpf }: { cpf: string }) {
         },
         {
           label: 'Trajeto mais recorrente',
-          value: `${frequentRoutes?.at(0)?.bairro} - ${frequentRoutes?.at(1)?.bairro}`,
+          value:
+            frequentRoutes && frequentRoutes.length > 0
+              ? `${frequentRoutes?.at(0)?.bairro} - ${frequentRoutes?.at(1)?.bairro}`
+              : undefined,
         },
       ],
     },

@@ -62,9 +62,10 @@ const secretarias = [
     ],
   },
   {
-    name: '1746',
+    name: 'Serviços',
     dataCategories: [
-      { name: 'Histórico de Solicitações', status: 'Integrado' },
+      { name: '1746', status: 'Integrado' },
+      { name: 'Carioca Digital', status: 'Indisponível' },
     ],
   },
   {

@@ -13,7 +13,7 @@ import { TableSkeleton } from '../../../../../../../components/table-skeleton'
 import { columns } from './components/columns'
 import { Dashboard } from './components/dashboard'
 
-export function Servico1746({ cpf }: { cpf: string }) {
+export function Servicos({ cpf }: { cpf: string }) {
   const { data: reports1746, isPending } = use1746Reports(cpf)
 
   return (
